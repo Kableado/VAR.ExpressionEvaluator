@@ -26,19 +26,19 @@ namespace VAR.ExpressionEvaluator
 
         public IExpressionNode ParsePlusAndMinus()
         {
-            IExpressionNode leftNode = ParseTerminus();
+            IExpressionNode leftNode = ParseUnary();
             while (true)
             {
                 if (_tokenizer.Token == Token.Plus)
                 {
                     _tokenizer.NextToken();
-                    IExpressionNode rightNode = ParseTerminus();
+                    IExpressionNode rightNode = ParseUnary();
                     leftNode = new ExpressionPlusNode(leftNode, rightNode);
                 }
                 else if (_tokenizer.Token == Token.Minus)
                 {
                     _tokenizer.NextToken();
-                    IExpressionNode rightNode = ParseTerminus();
+                    IExpressionNode rightNode = ParseUnary();
                     leftNode = new ExpressionMinusNode(leftNode, rightNode);
                 }
                 else
@@ -46,6 +46,22 @@ namespace VAR.ExpressionEvaluator
                     return leftNode;
                 }
             }
+        }
+
+        private IExpressionNode ParseUnary()
+        {
+            if (_tokenizer.Token == Token.Plus)
+            {
+                _tokenizer.NextToken();
+                return ParseUnary();
+            }
+            if (_tokenizer.Token == Token.Minus)
+            {
+                _tokenizer.NextToken();
+                var node = ParseUnary();
+                return new ExpressionNumberNegateNode(node);
+            }
+            return ParseTerminus();
         }
 
         private IExpressionNode ParseTerminus()

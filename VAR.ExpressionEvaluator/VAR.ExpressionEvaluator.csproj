@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionUnaryNode.cs" />
     <Compile Include="ExpressionBinaryNode.cs" />
     <Compile Include="ExpressionMinusNode.cs" />
+    <Compile Include="ExpressionNumberNegateNode.cs" />
     <Compile Include="ExpressionPlusNode.cs" />
     <Compile Include="ExpressionStringNode.cs" />
     <Compile Include="ExpressionNumberNode.cs" />

@@ -36,5 +36,46 @@ namespace VAR.ExpressionEvaluator.Tests
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(900000m, result);
         }
+
+        [TestMethod()]
+        public void ParseString__MinusTen()
+        {
+            string expression = "-10";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(-10m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__PlusTen()
+        {
+            string expression = "+10";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(10m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__MinusMinusTen()
+        {
+            string expression = "--10";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(10m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__MinusPlusChainTen()
+        {
+            string expression = "--++-+-10";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(10m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__10Minus20Minus30()
+        {
+            string expression = "10 + -20 - +30";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(-40m, result);
+        }
+
     }
 }
