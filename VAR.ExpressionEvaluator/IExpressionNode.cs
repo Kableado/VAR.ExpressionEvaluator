@@ -2,6 +2,6 @@
 {
     public interface IExpressionNode
     {
-        object Eval();
+        object Eval(IEvaluationContext evaluationContext);
     }
 }

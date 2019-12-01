@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace VAR.ExpressionEvaluator.Tests
 {
@@ -144,6 +145,49 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         #endregion Multiplication and division
+
+        #region Variables
+
+        [TestMethod()]
+        public void ParseString__Var1PlusVar2()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", 1m);
+            evaluationContex.SetVariable("v2", 1m);
+            string expression = "v1 + v2";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.AreEqual(2m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__Var1MultiplyVar2()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", 10m);
+            evaluationContex.SetVariable("v2", 5m);
+            string expression = "v1 * v2";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.AreEqual(50m, result);
+        }
+
+        #endregion Variables
+
+        #region Funcitions
+
+        [TestMethod()]
+        public void ParseString__MaxFunction()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetFunction("max", (parameters) =>
+            {
+                return parameters.Max(p => (decimal)p);
+            });
+            string expression = "max(1,2,10,5)";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.AreEqual(10m, result);
+        }
+
+        #endregion Functions
 
     }
 }

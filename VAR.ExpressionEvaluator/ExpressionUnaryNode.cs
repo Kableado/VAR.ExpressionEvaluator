@@ -13,9 +13,9 @@ namespace VAR.ExpressionEvaluator
             _operation = operation;
         }
 
-        public object Eval()
+        public object Eval(IEvaluationContext evaluationContext)
         {
-            object value = _node.Eval();
+            object value = _node.Eval(evaluationContext);
 
             object result = _operation(value);
             return result;

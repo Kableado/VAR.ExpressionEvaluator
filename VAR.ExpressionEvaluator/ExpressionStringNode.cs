@@ -9,7 +9,7 @@
             _string = str;
         }
 
-        public object Eval()
+        public object Eval(IEvaluationContext evaluationContext)
         {
             return _string;
         }

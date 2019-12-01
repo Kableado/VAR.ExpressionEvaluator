@@ -134,9 +134,14 @@ namespace VAR.ExpressionEvaluator
                         _currentToken = Token.LessOrEqualThan;
                     }
                     return;
+
+                case ',':
+                    NextChar();
+                    _currentToken = Token.Comma;
+                    return;
             }
 
-            // Keywords
+            // Identifier
             if (char.IsLetter(_currentChar))
             {
                 var sb = new StringBuilder();
@@ -147,7 +152,7 @@ namespace VAR.ExpressionEvaluator
                     if (_currentChar == '\0') { break; }
                 }
                 _text = sb.ToString();
-                _currentToken = Token.Keyword;
+                _currentToken = Token.Identifier;
                 return;
             }
 

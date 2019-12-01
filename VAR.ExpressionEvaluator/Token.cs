@@ -15,7 +15,8 @@
         LessOrEqualThan,
         ParenthesisStart,
         ParenthesisEnd,
-        Keyword,
+        Comma,
+        Identifier,
         String,
         Number,
     }

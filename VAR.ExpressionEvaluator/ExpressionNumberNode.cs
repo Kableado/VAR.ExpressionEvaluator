@@ -9,7 +9,7 @@
             _number = number;
         }
 
-        public object Eval()
+        public object Eval(IEvaluationContext evaluationContext)
         {
             return _number;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace VAR.ExpressionEvaluator
@@ -101,13 +102,47 @@ namespace VAR.ExpressionEvaluator
             if (_tokenizer.Token == Token.ParenthesisStart)
             {
                 _tokenizer.NextToken();
-                var node = ParsePlusAndMinus();
+                IExpressionNode node = ParsePlusAndMinus();
                 if (_tokenizer.Token != Token.ParenthesisEnd)
                 {
                     throw new Exception("Missing close parenthesis");
                 }
                 _tokenizer.NextToken();
                 return node;
+            }
+
+            if (_tokenizer.Token == Token.Identifier)
+            {
+                string identifier = _tokenizer.Text;
+                _tokenizer.NextToken();
+                if (_tokenizer.Token != Token.ParenthesisStart)
+                {
+                    IExpressionNode node = new ExpressionVariableNode(identifier);
+                    return node;
+                }
+                else
+                {
+                    _tokenizer.NextToken();
+                    var parameters = new List<IExpressionNode>();
+                    while (true)
+                    {
+                        parameters.Add(ParsePlusAndMinus());
+                        if (_tokenizer.Token == Token.Comma)
+                        {
+                            _tokenizer.NextToken();
+                            continue;
+                        }
+                        break;
+                    }
+                    if (_tokenizer.Token != Token.ParenthesisEnd)
+                    {
+                        throw new Exception("Missing close parenthesis");
+                    }
+                    _tokenizer.NextToken();
+
+                    IExpressionNode node = new ExpressionFunctionNode(identifier, parameters.ToArray());
+                    return node;
+                }
             }
 
             throw new Exception(string.Format("Unexpected token: {0}", _tokenizer.Token.ToString()));
@@ -121,10 +156,10 @@ namespace VAR.ExpressionEvaluator
             return parser.ParseExpression();
         }
 
-        public static object EvaluateString(string str)
+        public static object EvaluateString(string str, IEvaluationContext evaluationContext = null)
         {
             IExpressionNode node = ParseString(str);
-            return node.Eval();
+            return node.Eval(evaluationContext);
         }
     }
 }

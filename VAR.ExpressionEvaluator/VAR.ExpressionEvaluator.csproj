@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvaluationContext.cs" />
     <Compile Include="ExpressionDivisionNode.cs" />
+    <Compile Include="ExpressionFunctionNode.cs" />
     <Compile Include="ExpressionMultiplyNode.cs" />
     <Compile Include="ExpressionUnaryNode.cs" />
     <Compile Include="ExpressionBinaryNode.cs" />
@@ -50,6 +52,8 @@
     <Compile Include="ExpressionPlusNode.cs" />
     <Compile Include="ExpressionStringNode.cs" />
     <Compile Include="ExpressionNumberNode.cs" />
+    <Compile Include="ExpressionVariableNode.cs" />
+    <Compile Include="IEvaluationContext.cs" />
     <Compile Include="IExpressionNode.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="Parser.cs" />

@@ -15,10 +15,10 @@ namespace VAR.ExpressionEvaluator
             _operation = operation;
         }
 
-        public object Eval()
+        public object Eval(IEvaluationContext evaluationContext)
         {
-            object leftValue = _leftNode.Eval();
-            object rightValue = _rightNode.Eval();
+            object leftValue = _leftNode.Eval(evaluationContext);
+            object rightValue = _rightNode.Eval(evaluationContext);
 
             object result = _operation(leftValue, rightValue);
             return result;

@@ -14,7 +14,7 @@ namespace VAR.ExpressionEvaluator.Tests
                 operation: (a, b) => (decimal)a + (decimal)b
             );
 
-            var result = expr.Eval();
+            var result = expr.Eval(null);
 
             Assert.AreEqual(30m, result);
         }
@@ -28,7 +28,7 @@ namespace VAR.ExpressionEvaluator.Tests
                 operation: (a, b) => (decimal)a - (decimal)b
             );
 
-            var result = expr.Eval();
+            var result = expr.Eval(null);
 
             Assert.AreEqual(-10m, result);
         }
@@ -42,7 +42,7 @@ namespace VAR.ExpressionEvaluator.Tests
                 operation: (a, b) => (decimal)a * (decimal)b
             );
 
-            var result = expr.Eval();
+            var result = expr.Eval(null);
 
             Assert.AreEqual(200m, result);
         }
@@ -56,7 +56,7 @@ namespace VAR.ExpressionEvaluator.Tests
                 operation: (a, b) => (decimal)a / (decimal)b
             );
 
-            var result = expr.Eval();
+            var result = expr.Eval(null);
 
             Assert.AreEqual(2m, result);
         }

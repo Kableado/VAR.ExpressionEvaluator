@@ -9,22 +9,21 @@ namespace VAR.ExpressionEvaluator.Tests
         public void ExpressionNumberNode__Hello()
         {
             IExpressionNode node = new ExpressionStringNode("Hello");
-            Assert.AreEqual("Hello", node.Eval());
+            Assert.AreEqual("Hello", node.Eval(null));
         }
 
         [TestMethod()]
         public void ExpressionNumberNode__World()
         {
             IExpressionNode node = new ExpressionStringNode("World");
-            Assert.AreEqual("World", node.Eval());
+            Assert.AreEqual("World", node.Eval(null));
         }
 
         [TestMethod()]
         public void ExpressionNumberNode__Hello_World()
         {
             IExpressionNode node = new ExpressionStringNode("Hello World");
-            Assert.AreEqual("Hello World", node.Eval());
+            Assert.AreEqual("Hello World", node.Eval(null));
         }
-
     }
 }

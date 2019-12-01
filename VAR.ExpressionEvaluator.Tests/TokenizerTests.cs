@@ -96,17 +96,17 @@ namespace VAR.ExpressionEvaluator.Tests
             var t = new Tokenizer(new StringReader(testString));
 
             // "null"
-            Assert.AreEqual(t.Token, Token.Keyword);
+            Assert.AreEqual(t.Token, Token.Identifier);
             Assert.AreEqual(t.Text, "null");
             t.NextToken();
 
             // "true"
-            Assert.AreEqual(t.Token, Token.Keyword);
+            Assert.AreEqual(t.Token, Token.Identifier);
             Assert.AreEqual(t.Text, "true");
             t.NextToken();
 
             // "false"
-            Assert.AreEqual(t.Token, Token.Keyword);
+            Assert.AreEqual(t.Token, Token.Identifier);
             Assert.AreEqual(t.Text, "false");
             t.NextToken();
 
@@ -168,7 +168,7 @@ namespace VAR.ExpressionEvaluator.Tests
             t.NextToken();
 
             // "false"
-            Assert.AreEqual(t.Token, Token.Keyword);
+            Assert.AreEqual(t.Token, Token.Identifier);
             Assert.AreEqual(t.Text, "false");
             t.NextToken();
 
