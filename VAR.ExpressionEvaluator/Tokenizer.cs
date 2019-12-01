@@ -4,27 +4,7 @@ using System.Text;
 
 namespace VAR.ExpressionEvaluator
 {
-    public enum Token
-    {
-        EOF,
-        Plus,
-        Minus,
-        Division,
-        Multiply,
-        Equals,
-        ExclusiveEquals,
-        GreaterThan,
-        GreaterOrEqualThan,
-        LessThan,
-        LessOrEqualThan,
-        ParentesisStart,
-        ParentesisEnd,
-        Keyword,
-        String,
-        Number,
-    }
-
-    public class Tokenizer
+    public class Tokenizer : ITokenizer
     {
         private TextReader _reader;
         private int _currentPosition = 0;
