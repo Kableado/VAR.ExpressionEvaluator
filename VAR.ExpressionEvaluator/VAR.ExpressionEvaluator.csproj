@@ -42,10 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionBinaryNode.cs" />
+    <Compile Include="ExpressionMinusNode.cs" />
+    <Compile Include="ExpressionPlusNode.cs" />
     <Compile Include="ExpressionStringNode.cs" />
     <Compile Include="ExpressionNumberNode.cs" />
     <Compile Include="IExpressionNode.cs" />
     <Compile Include="ITokenizer.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Tokenizer.cs" />
