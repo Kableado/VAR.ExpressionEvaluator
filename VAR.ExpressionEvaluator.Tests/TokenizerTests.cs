@@ -120,7 +120,7 @@ namespace VAR.ExpressionEvaluator.Tests
             var t = new Tokenizer(new StringReader(testString));
 
             // "("
-            Assert.AreEqual(t.Token, Token.ParentesisStart);
+            Assert.AreEqual(t.Token, Token.ParenthesisStart);
             t.NextToken();
 
             // "10"
@@ -138,7 +138,7 @@ namespace VAR.ExpressionEvaluator.Tests
             t.NextToken();
 
             // ")"
-            Assert.AreEqual(t.Token, Token.ParentesisEnd);
+            Assert.AreEqual(t.Token, Token.ParenthesisEnd);
             t.NextToken();
 
             // "*"

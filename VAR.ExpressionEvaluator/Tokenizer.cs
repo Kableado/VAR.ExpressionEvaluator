@@ -93,12 +93,12 @@ namespace VAR.ExpressionEvaluator
 
                 case '(':
                     NextChar();
-                    _currentToken = Token.ParentesisStart;
+                    _currentToken = Token.ParenthesisStart;
                     return;
 
                 case ')':
                     NextChar();
-                    _currentToken = Token.ParentesisEnd;
+                    _currentToken = Token.ParenthesisEnd;
                     return;
 
                 case '=':

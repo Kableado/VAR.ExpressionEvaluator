@@ -26,24 +26,49 @@ namespace VAR.ExpressionEvaluator
 
         public IExpressionNode ParsePlusAndMinus()
         {
-            IExpressionNode leftNode = ParseUnary();
+            IExpressionNode leftNode = ParseMultiplyDivision();
             while (true)
             {
                 if (_tokenizer.Token == Token.Plus)
                 {
                     _tokenizer.NextToken();
-                    IExpressionNode rightNode = ParseUnary();
+                    IExpressionNode rightNode = ParseMultiplyDivision();
                     leftNode = new ExpressionPlusNode(leftNode, rightNode);
                 }
                 else if (_tokenizer.Token == Token.Minus)
                 {
                     _tokenizer.NextToken();
-                    IExpressionNode rightNode = ParseUnary();
+                    IExpressionNode rightNode = ParseMultiplyDivision();
                     leftNode = new ExpressionMinusNode(leftNode, rightNode);
                 }
                 else
                 {
                     return leftNode;
+                }
+            }
+        }
+
+        private IExpressionNode ParseMultiplyDivision()
+        {
+            IExpressionNode lhs = ParseUnary();
+            while (true)
+            {
+                if (_tokenizer.Token == Token.Multiply)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rhs = ParseUnary();
+                    lhs = new ExpressionMultiplyNode(lhs, rhs);
+
+                }
+                else if (_tokenizer.Token == Token.Division)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rhs = ParseUnary();
+                    lhs = new ExpressionDivisionNode(lhs, rhs);
+                }
+                else
+                {
+                    return lhs;
                 }
             }
         }
@@ -69,6 +94,18 @@ namespace VAR.ExpressionEvaluator
             if (_tokenizer.Token == Token.Number)
             {
                 var node = new ExpressionNumberNode(_tokenizer.Number ?? 0m);
+                _tokenizer.NextToken();
+                return node;
+            }
+
+            if (_tokenizer.Token == Token.ParenthesisStart)
+            {
+                _tokenizer.NextToken();
+                var node = ParsePlusAndMinus();
+                if (_tokenizer.Token != Token.ParenthesisEnd)
+                {
+                    throw new Exception("Missing close parenthesis");
+                }
                 _tokenizer.NextToken();
                 return node;
             }

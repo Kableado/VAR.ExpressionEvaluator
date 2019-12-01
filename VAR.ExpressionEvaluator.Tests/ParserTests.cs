@@ -5,6 +5,8 @@ namespace VAR.ExpressionEvaluator.Tests
     [TestClass()]
     public class ParserTests
     {
+        #region Plus and Minus
+
         [TestMethod()]
         public void ParseString__Ten_EqualsTen()
         {
@@ -36,6 +38,10 @@ namespace VAR.ExpressionEvaluator.Tests
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(900000m, result);
         }
+
+        #endregion Plus and minus
+
+        #region Number signs
 
         [TestMethod()]
         public void ParseString__MinusTen()
@@ -76,6 +82,68 @@ namespace VAR.ExpressionEvaluator.Tests
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(-40m, result);
         }
+
+        #endregion Number signs
+
+        #region Multiplication and division
+
+        [TestMethod()]
+        public void ParseString__10MutiplyBy2()
+        {
+            string expression = "10 * 2";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(20m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__10DividedBy2()
+        {
+            string expression = "10 / 2";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(5m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__5DividedBy2()
+        {
+            string expression = "5 / 2";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(2.5m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__5DividedBy2Plus1()
+        {
+            string expression = "5 / 2 + 1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(3.5m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__1Plus5DividedBy2()
+        {
+            string expression = "1 + 5 / 2";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(3.5m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__5DividedByParen1Plus1()
+        {
+            string expression = "5 / (1 + 1)";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(2.5m, result);
+        }
+
+        [TestMethod()]
+        public void ParseString__Paren2Plus2DividedByParen1Plus1()
+        {
+            string expression = "(2 + 2) / (1 + 1)";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(2m, result);
+        }
+
+        #endregion Multiplication and division
 
     }
 }
