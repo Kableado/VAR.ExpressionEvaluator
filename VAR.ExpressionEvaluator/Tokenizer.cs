@@ -12,6 +12,11 @@ namespace VAR.ExpressionEvaluator
         Division,
         Multiply,
         Equals,
+        ExclusiveEquals,
+        GreaterThan,
+        GreaterOrEqualThan,
+        LessThan,
+        LessOrEqualThan,
         ParentesisStart,
         ParentesisEnd,
         Keyword,
@@ -119,6 +124,35 @@ namespace VAR.ExpressionEvaluator
                 case '=':
                     NextChar();
                     _currentToken = Token.Equals;
+                    if (_currentChar == '=')
+                    {
+                        NextChar();
+                        if (_currentChar == '=')
+                        {
+                            NextChar();
+                            _currentToken = Token.ExclusiveEquals;
+                        }
+                    }
+                    return;
+
+                case '>':
+                    NextChar();
+                    _currentToken = Token.GreaterThan;
+                    if (_currentChar == '=')
+                    {
+                        NextChar();
+                        _currentToken = Token.GreaterOrEqualThan;
+                    }
+                    return;
+
+                case '<':
+                    NextChar();
+                    _currentToken = Token.LessThan;
+                    if (_currentChar == '=')
+                    {
+                        NextChar();
+                        _currentToken = Token.LessOrEqualThan;
+                    }
                     return;
             }
 

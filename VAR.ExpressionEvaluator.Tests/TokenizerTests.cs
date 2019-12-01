@@ -174,5 +174,43 @@ namespace VAR.ExpressionEvaluator.Tests
 
             Assert.AreEqual(t.Token, Token.EOF);
         }
+
+        [TestMethod()]
+        public void Tokenizer__MoreTokens()
+        {
+            var testString = "= < > <= >= == === ";
+            var t = new Tokenizer(new StringReader(testString));
+
+            // "="
+            Assert.AreEqual(t.Token, Token.Equals);
+            t.NextToken();
+
+            // "<"
+            Assert.AreEqual(t.Token, Token.LessThan);
+            t.NextToken();
+
+            // ">"
+            Assert.AreEqual(t.Token, Token.GreaterThan);
+            t.NextToken();
+
+            // "<="
+            Assert.AreEqual(t.Token, Token.LessOrEqualThan);
+            t.NextToken();
+
+            // ">="
+            Assert.AreEqual(t.Token, Token.GreaterOrEqualThan);
+            t.NextToken();
+
+            // "=="
+            Assert.AreEqual(t.Token, Token.Equals);
+            t.NextToken();
+
+            // "==="
+            Assert.AreEqual(t.Token, Token.ExclusiveEquals);
+            t.NextToken();
+
+            Assert.AreEqual(t.Token, Token.EOF);
+        }
+
     }
 }
