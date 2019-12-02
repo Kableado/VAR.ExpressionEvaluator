@@ -9,7 +9,7 @@ namespace VAR.ExpressionEvaluator.Tests
         #region Plus and Minus
 
         [TestMethod()]
-        public void ParseString__Ten_EqualsTen()
+        public void PlusAndMinus__Ten_EqualsTen()
         {
             string expression = "10";
             object result = Parser.EvaluateString(expression);
@@ -17,7 +17,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__OnePlusTwo_EqualsThree()
+        public void PlusAndMinus__OnePlusTwo_EqualsThree()
         {
             string expression = "1   + 2";
             object result = Parser.EvaluateString(expression);
@@ -25,7 +25,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__OneMinusTwo_EqualsMinusOne()
+        public void PlusAndMinus__OneMinusTwo_EqualsMinusOne()
         {
             string expression = "1   - 2";
             object result = Parser.EvaluateString(expression);
@@ -33,7 +33,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__OneMillionMinusHundredThousands_EqualsNineHundredThousands()
+        public void PlusAndMinus__OneMillionMinusHundredThousands_EqualsNineHundredThousands()
         {
             string expression = "1000000   - 100000";
             object result = Parser.EvaluateString(expression);
@@ -45,7 +45,7 @@ namespace VAR.ExpressionEvaluator.Tests
         #region Number signs
 
         [TestMethod()]
-        public void ParseString__MinusTen()
+        public void Signs__MinusTen()
         {
             string expression = "-10";
             object result = Parser.EvaluateString(expression);
@@ -53,7 +53,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__PlusTen()
+        public void Signs__PlusTen()
         {
             string expression = "+10";
             object result = Parser.EvaluateString(expression);
@@ -61,7 +61,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__MinusMinusTen()
+        public void Signs__MinusMinusTen()
         {
             string expression = "--10";
             object result = Parser.EvaluateString(expression);
@@ -69,7 +69,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__MinusPlusChainTen()
+        public void Signs__MinusPlusChainTen()
         {
             string expression = "--++-+-10";
             object result = Parser.EvaluateString(expression);
@@ -77,7 +77,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__10Minus20Minus30()
+        public void Signs__10Minus20Minus30()
         {
             string expression = "10 + -20 - +30";
             object result = Parser.EvaluateString(expression);
@@ -89,7 +89,7 @@ namespace VAR.ExpressionEvaluator.Tests
         #region Multiplication and division
 
         [TestMethod()]
-        public void ParseString__10MutiplyBy2()
+        public void MultAndDiv__10MutiplyBy2()
         {
             string expression = "10 * 2";
             object result = Parser.EvaluateString(expression);
@@ -97,7 +97,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__10DividedBy2()
+        public void MultAndDiv__10DividedBy2()
         {
             string expression = "10 / 2";
             object result = Parser.EvaluateString(expression);
@@ -105,7 +105,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__5DividedBy2()
+        public void MultAndDiv__5DividedBy2()
         {
             string expression = "5 / 2";
             object result = Parser.EvaluateString(expression);
@@ -113,7 +113,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__5DividedBy2Plus1()
+        public void MultAndDiv__5DividedBy2Plus1()
         {
             string expression = "5 / 2 + 1";
             object result = Parser.EvaluateString(expression);
@@ -121,7 +121,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__1Plus5DividedBy2()
+        public void MultAndDiv__1Plus5DividedBy2()
         {
             string expression = "1 + 5 / 2";
             object result = Parser.EvaluateString(expression);
@@ -129,7 +129,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__5DividedByParen1Plus1()
+        public void MultAndDiv__5DividedByParen1Plus1()
         {
             string expression = "5 / (1 + 1)";
             object result = Parser.EvaluateString(expression);
@@ -137,7 +137,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__Paren2Plus2DividedByParen1Plus1()
+        public void MultAndDiv__Paren2Plus2DividedByParen1Plus1()
         {
             string expression = "(2 + 2) / (1 + 1)";
             object result = Parser.EvaluateString(expression);
@@ -149,7 +149,7 @@ namespace VAR.ExpressionEvaluator.Tests
         #region Variables
 
         [TestMethod()]
-        public void ParseString__Var1PlusVar2()
+        public void Variables__Var1PlusVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
             evaluationContex.SetVariable("v1", 1m);
@@ -160,7 +160,7 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void ParseString__Var1MultiplyVar2()
+        public void Variables__Var1MultiplyVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
             evaluationContex.SetVariable("v1", 10m);
@@ -175,7 +175,7 @@ namespace VAR.ExpressionEvaluator.Tests
         #region Funcitions
 
         [TestMethod()]
-        public void ParseString__MaxFunction()
+        public void Functions__MaxFunction()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
             evaluationContex.SetFunction("max", (parameters) =>
