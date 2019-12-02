@@ -99,20 +99,27 @@ namespace VAR.ExpressionEvaluator
                 return node;
             }
 
-            if (_tokenizer.Token == Token.ParenthesisStart)
+            if (_tokenizer.Token == Token.String)
             {
-                _tokenizer.NextToken();
-                IExpressionNode node = ParsePlusAndMinus();
-                if (_tokenizer.Token != Token.ParenthesisEnd)
-                {
-                    throw new Exception("Missing close parenthesis");
-                }
+                IExpressionNode node = new ExpressionStringNode(_tokenizer.Text);
                 _tokenizer.NextToken();
                 return node;
             }
 
             if (_tokenizer.Token == Token.Identifier)
             {
+                string identifierToLower = _tokenizer.Text.ToLower();
+                if (identifierToLower == "true")
+                {
+                    _tokenizer.NextToken();
+                    return new ExpressionBooleanNode(true);
+                }
+                if (identifierToLower == "false")
+                {
+                    _tokenizer.NextToken();
+                    return new ExpressionBooleanNode(false);
+                }
+
                 string identifier = _tokenizer.Text;
                 _tokenizer.NextToken();
                 if (_tokenizer.Token != Token.ParenthesisStart)
@@ -143,6 +150,18 @@ namespace VAR.ExpressionEvaluator
                     IExpressionNode node = new ExpressionFunctionNode(identifier, parameters.ToArray());
                     return node;
                 }
+            }
+
+            if (_tokenizer.Token == Token.ParenthesisStart)
+            {
+                _tokenizer.NextToken();
+                IExpressionNode node = ParsePlusAndMinus();
+                if (_tokenizer.Token != Token.ParenthesisEnd)
+                {
+                    throw new Exception("Missing close parenthesis");
+                }
+                _tokenizer.NextToken();
+                return node;
             }
 
             throw new Exception(string.Format("Unexpected token: {0}", _tokenizer.Token.ToString()));

@@ -1,4 +1,6 @@
-﻿namespace VAR.ExpressionEvaluator
+﻿using System;
+
+namespace VAR.ExpressionEvaluator
 {
     public class ExpressionNumberNegateNode : ExpressionUnaryNode
     {
@@ -9,7 +11,20 @@
 
         private static object NumberNegateOp(object value)
         {
-            return - (decimal)value;
+            if (value is string)
+            {
+                if (decimal.TryParse((string)value, out decimal dec) == false)
+                {
+                    throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)value));
+                }
+                value = dec;
+            }
+
+            if ((value is decimal) == false)
+            {
+                throw new Exception("Can't negate non decimal values");
+            }
+            return -(decimal)value;
         }
     }
 }

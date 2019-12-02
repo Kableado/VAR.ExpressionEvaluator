@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 
 namespace VAR.ExpressionEvaluator.Tests
@@ -152,8 +153,8 @@ namespace VAR.ExpressionEvaluator.Tests
         public void Variables__Var1PlusVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
-            evaluationContex.SetVariable("v1", 1m);
-            evaluationContex.SetVariable("v2", 1m);
+            evaluationContex.SetVariable("v1", 1);
+            evaluationContex.SetVariable("v2", 1);
             string expression = "v1 + v2";
             object result = Parser.EvaluateString(expression, evaluationContex);
             Assert.AreEqual(2m, result);
@@ -163,8 +164,8 @@ namespace VAR.ExpressionEvaluator.Tests
         public void Variables__Var1MultiplyVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
-            evaluationContex.SetVariable("v1", 10m);
-            evaluationContex.SetVariable("v2", 5m);
+            evaluationContex.SetVariable("v1", 10);
+            evaluationContex.SetVariable("v2", 5);
             string expression = "v1 * v2";
             object result = Parser.EvaluateString(expression, evaluationContex);
             Assert.AreEqual(50m, result);
@@ -188,6 +189,72 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         #endregion Functions
+
+        #region Strings
+
+        [TestMethod()]
+        public void Strings__Contatenate_Hello_World()
+        {
+            string expression = "\"Hello\" + ' ' +\"World\"";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual("Hello World", result);
+        }
+
+        [TestMethod()]
+        public void Strings__Contatenate_Hello_World_WithVariables()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", "Hello");
+            evaluationContex.SetVariable("v2", " ");
+            evaluationContex.SetVariable("v3", "World");
+            string expression = "v1 + v2 + v3";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.AreEqual("Hello World", result);
+        }
+
+        [TestMethod()]
+        public void Strings__Fail_Minus()
+        {
+            string expression = "'Hello' - 'World'";
+            try
+            {
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        [TestMethod()]
+        public void Strings__Fail_Multiply()
+        {
+            string expression = "'Hello' * 'World'";
+            try
+            {
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        [TestMethod()]
+        public void Strings__Fail_Division()
+        {
+            string expression = "'Hello' / 'World'";
+            try
+            {
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        #endregion Strings
 
     }
 }
