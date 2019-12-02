@@ -10,6 +10,7 @@
         private static object BooleanNotOp(object value)
         {
             value = ExpressionBooleanNode.ConvertToBoolean(value);
+            if (value == null) { return null; }
             return !(bool)value;
         }
     }

@@ -39,6 +39,11 @@ namespace VAR.ExpressionEvaluator
 
         public void SetVariable(string name, object value)
         {
+            if (value is DBNull)
+            {
+                value = null;
+            }
+
             if (value is DateTime)
             {
                 value = ((DateTime)value).ToString("s");
@@ -60,7 +65,7 @@ namespace VAR.ExpressionEvaluator
         {
             if (_variables.ContainsKey(name) == false)
             {
-                return null;
+                throw new Exception(string.Format("Variable {0} not found", name));
             }
             return _variables[name];
         }

@@ -9,9 +9,10 @@
 
         private static object BooleanAndOp(object leftValue, object rightValue)
         {
-            bool bLeftValue = ExpressionBooleanNode.ConvertToBoolean(leftValue);
-            bool brightValue = ExpressionBooleanNode.ConvertToBoolean(rightValue);
-            return bLeftValue && brightValue;
+            bool? bLeftValue = ExpressionBooleanNode.ConvertToBoolean(leftValue);
+            bool? brightValue = ExpressionBooleanNode.ConvertToBoolean(rightValue);
+            if (bLeftValue == null || bLeftValue == null) { return null; }
+            return bLeftValue.Value && brightValue.Value;
         }
     }
 }

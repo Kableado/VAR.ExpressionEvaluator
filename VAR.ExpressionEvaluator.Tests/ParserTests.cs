@@ -401,5 +401,45 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #endregion BooleanOps
 
+        #region Null value
+
+
+        [TestMethod()]
+        public void NullValue_NullPlusAnything_EqualsNull()
+        {
+            Assert.AreEqual(null, Parser.EvaluateString("null + 1"));
+            Assert.AreEqual(null, Parser.EvaluateString("null + 100"));
+            Assert.AreEqual(null, Parser.EvaluateString("1 + null"));
+            Assert.AreEqual(null, Parser.EvaluateString("100 + null"));
+            Assert.AreEqual(null, Parser.EvaluateString("null + null"));
+        }
+
+        [TestMethod()]
+        public void NullValue_NullMinusAnything_EqualsNull()
+        {
+            Assert.AreEqual(null, Parser.EvaluateString("null - 1"));
+            Assert.AreEqual(null, Parser.EvaluateString("null - 100"));
+            Assert.AreEqual(null, Parser.EvaluateString("1 - null"));
+            Assert.AreEqual(null, Parser.EvaluateString("100 - null"));
+            Assert.AreEqual(null, Parser.EvaluateString("null - null"));
+        }
+
+        [TestMethod()]
+        public void NullValue_NullByAnything_EqualsNull()
+        {
+            Assert.AreEqual(null, Parser.EvaluateString("null * 1"));
+            Assert.AreEqual(null, Parser.EvaluateString("null * 100"));
+            Assert.AreEqual(null, Parser.EvaluateString("1 * null"));
+            Assert.AreEqual(null, Parser.EvaluateString("100 * null"));
+            Assert.AreEqual(null, Parser.EvaluateString("null * null"));
+
+            Assert.AreEqual(null, Parser.EvaluateString("null / 1"));
+            Assert.AreEqual(null, Parser.EvaluateString("null / 100"));
+            Assert.AreEqual(null, Parser.EvaluateString("1 / null"));
+            Assert.AreEqual(null, Parser.EvaluateString("100 / null"));
+            Assert.AreEqual(null, Parser.EvaluateString("null / null"));
+        }
+        
+        #endregion
     }
 }

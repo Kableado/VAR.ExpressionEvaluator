@@ -11,6 +11,11 @@ namespace VAR.ExpressionEvaluator
 
         private static object NumberNegateOp(object value)
         {
+            if (value == null)
+            {
+                return null;
+            }
+
             if (value is string)
             {
                 if (decimal.TryParse((string)value, out decimal dec) == false)

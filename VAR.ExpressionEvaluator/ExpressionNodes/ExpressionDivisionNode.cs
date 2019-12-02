@@ -11,6 +11,11 @@ namespace VAR.ExpressionEvaluator
 
         private static object DivisionOp(object leftValue, object rightValue)
         {
+            if (leftValue == null || rightValue == null)
+            {
+                return null;
+            }
+
             if (leftValue is string)
             {
                 if (decimal.TryParse((string)leftValue, out decimal dec) == false)

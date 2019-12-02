@@ -11,6 +11,11 @@ namespace VAR.ExpressionEvaluator
 
         private static object PlusOp(object leftValue, object rightValue)
         {
+            if (leftValue == null || rightValue == null)
+            {
+                return null;
+            }
+
             if (leftValue is string || rightValue is string)
             {
                 return string.Concat(Convert.ToString(leftValue), Convert.ToString(rightValue));

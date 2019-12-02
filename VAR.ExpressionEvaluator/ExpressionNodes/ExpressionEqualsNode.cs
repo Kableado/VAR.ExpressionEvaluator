@@ -11,6 +11,15 @@ namespace VAR.ExpressionEvaluator
 
         private static object EqualsOp(object leftValue, object rightValue)
         {
+            if (leftValue == null && rightValue == null)
+            {
+                return true;
+            }
+            if (leftValue == null || rightValue == null)
+            {
+                return false;
+            }
+
             if (leftValue is string && rightValue is string)
             {
                 return string.Compare((string)leftValue, (string)rightValue) == 0;

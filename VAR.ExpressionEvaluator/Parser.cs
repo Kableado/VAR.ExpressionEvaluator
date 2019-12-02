@@ -197,6 +197,11 @@ namespace VAR.ExpressionEvaluator
                     _tokenizer.NextToken();
                     return new ExpressionBooleanNode(false);
                 }
+                if (identifierToLower == "null")
+                {
+                    _tokenizer.NextToken();
+                    return new ExpressionNullNode();
+                }
 
                 string identifier = _tokenizer.Text;
                 _tokenizer.NextToken();

@@ -14,8 +14,13 @@
             return _value;
         }
 
-        public static bool ConvertToBoolean(object value)
+        public static bool? ConvertToBoolean(object value)
         {
+            if (value == null)
+            {
+                return null;
+            }
+
             if (value is bool)
             {
                 return (bool)value;

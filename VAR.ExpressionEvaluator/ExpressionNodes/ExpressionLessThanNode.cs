@@ -11,6 +11,11 @@ namespace VAR.ExpressionEvaluator
 
         private static object LessThanOp(object leftValue, object rightValue)
         {
+            if (leftValue == null || rightValue == null)
+            {
+                return false;
+            }
+
             if (leftValue is string && rightValue is string)
             {
                 return string.Compare((string)leftValue, (string)rightValue) < 0;

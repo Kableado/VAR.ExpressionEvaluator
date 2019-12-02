@@ -55,6 +55,7 @@
     <Compile Include="ExpressionNodes\ExpressionLessThanNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionMultiplyNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionNotEqualsNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionNullNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionUnaryNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionBinaryNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionMinusNode.cs" />
