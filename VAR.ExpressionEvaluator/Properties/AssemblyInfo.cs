@@ -2,9 +2,9 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("VAR.ExpressionEvaluator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Expression Evaluation Library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("VAR")]
 [assembly: AssemblyProduct("VAR.ExpressionEvaluator")]
 [assembly: AssemblyCopyright("Copyright © VAR 2019")]
 [assembly: AssemblyTrademark("")]

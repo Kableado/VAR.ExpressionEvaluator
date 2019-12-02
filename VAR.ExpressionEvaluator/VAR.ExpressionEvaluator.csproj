@@ -71,5 +71,10 @@
     <Compile Include="Token.cs" />
     <Compile Include="Tokenizer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Build.NuGet.cmd" />
+    <None Include="packages.config" />
+    <None Include="VAR.ExpressionEvaluator.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

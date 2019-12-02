@@ -1,3 +1,6 @@
 /.vs/*
 */bin/*
 */obj/*
+*.nupkg
+/packages/*
+*.user
