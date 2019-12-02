@@ -171,10 +171,10 @@ namespace VAR.ExpressionEvaluator
             }
 
             // Identifier
-            if (char.IsLetter(_currentChar))
+            if (IsIdentifierStartLetter(_currentChar))
             {
                 var sb = new StringBuilder();
-                while (char.IsLetterOrDigit(_currentChar) || _currentChar == '_')
+                while (IsIdentifierLetter(_currentChar))
                 {
                     sb.Append(_currentChar);
                     NextChar();
@@ -216,7 +216,11 @@ namespace VAR.ExpressionEvaluator
                     else
                     {
                         NextChar();
-                        if (_currentChar == '\\')
+                        if (_currentChar == stringEndsWith)
+                        {
+                            sbString.Append(stringEndsWith);
+                        }
+                        else if (_currentChar == '\\')
                         {
                             sbString.Append('\\');
                         }
@@ -259,6 +263,16 @@ namespace VAR.ExpressionEvaluator
             }
 
             throw new InvalidDataException(string.Format("Unexpected character: {0} at {1}", _currentChar, _currentPosition));
+        }
+
+        private static bool IsIdentifierLetter(char c)
+        {
+            return char.IsLetterOrDigit(c) || c == '_' || c == '$' || c == '#' || c == '@';
+        }
+
+        private static bool IsIdentifierStartLetter(char c)
+        {
+            return char.IsLetter(c) || c == '_' || c == '$' || c == '#' || c == '@';
         }
     }
 }

@@ -90,9 +90,9 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
-        public void Tokenizer__Keywords()
+        public void Tokenizer__Identifiers()
         {
-            var testString = "null true false";
+            var testString = "null true false _$variable1 $variable2";
             var t = new Tokenizer(new StringReader(testString));
 
             // "null"
@@ -108,6 +108,16 @@ namespace VAR.ExpressionEvaluator.Tests
             // "false"
             Assert.AreEqual(t.Token, Token.Identifier);
             Assert.AreEqual(t.Text, "false");
+            t.NextToken();
+
+            // "_$variable1"
+            Assert.AreEqual(t.Token, Token.Identifier);
+            Assert.AreEqual(t.Text, "_$variable1");
+            t.NextToken();
+
+            // "$variable2"
+            Assert.AreEqual(t.Token, Token.Identifier);
+            Assert.AreEqual(t.Text, "$variable2");
             t.NextToken();
 
             Assert.AreEqual(t.Token, Token.EOF);

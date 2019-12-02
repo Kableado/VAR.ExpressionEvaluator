@@ -171,6 +171,17 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.AreEqual(50m, result);
         }
 
+        [TestMethod()]
+        public void Variables__Var1DivideVar2()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("_v1", 100);
+            evaluationContex.SetVariable("$v2", 20);
+            string expression = "_v1 / $v2";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.AreEqual(5m, result);
+        }
+
         #endregion Variables
 
         #region Funcitions
