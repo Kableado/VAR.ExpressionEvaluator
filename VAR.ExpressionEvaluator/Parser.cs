@@ -15,7 +15,7 @@ namespace VAR.ExpressionEvaluator
 
         public IExpressionNode ParseExpression()
         {
-            var expr = ParsePlusAndMinus();
+            var expr = ParseRelations();
 
             if (_tokenizer.Token != Token.EOF)
             {
@@ -25,7 +25,55 @@ namespace VAR.ExpressionEvaluator
             return expr;
         }
 
-        public IExpressionNode ParsePlusAndMinus()
+        private IExpressionNode ParseRelations()
+        {
+            IExpressionNode leftNode = ParsePlusAndMinus();
+            while (true)
+            {
+                if (_tokenizer.Token == Token.Equals || _tokenizer.Token == Token.ExclusiveEquals)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionEqualsNode(leftNode, rightNode);
+                }
+                else if (_tokenizer.Token == Token.NotEquals)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionNotEqualsNode(leftNode, rightNode);
+                }
+                else if (_tokenizer.Token == Token.LessThan)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionLessThanNode(leftNode, rightNode);
+                }
+                else if (_tokenizer.Token == Token.LessOrEqualThan)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionLessOrEqualThanNode(leftNode, rightNode);
+                }
+                else if (_tokenizer.Token == Token.GreaterThan)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionGreaterThanNode(leftNode, rightNode);
+                }
+                else if (_tokenizer.Token == Token.GreaterOrEqualThan)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionGreaterOrEqualThanNode(leftNode, rightNode);
+                }
+                else
+                {
+                    return leftNode;
+                }
+            }
+        }
+
+        private IExpressionNode ParsePlusAndMinus()
         {
             IExpressionNode leftNode = ParseMultiplyDivision();
             while (true)
@@ -155,7 +203,7 @@ namespace VAR.ExpressionEvaluator
             if (_tokenizer.Token == Token.ParenthesisStart)
             {
                 _tokenizer.NextToken();
-                IExpressionNode node = ParsePlusAndMinus();
+                IExpressionNode node = ParseRelations();
                 if (_tokenizer.Token != Token.ParenthesisEnd)
                 {
                     throw new Exception("Missing close parenthesis");

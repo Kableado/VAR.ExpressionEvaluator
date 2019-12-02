@@ -101,6 +101,15 @@ namespace VAR.ExpressionEvaluator
                     _currentToken = Token.ParenthesisEnd;
                     return;
 
+                case '!':
+                    NextChar();
+                    _currentToken = Token.Not;
+                    if (_currentChar == '=')
+                    {
+                        NextChar();
+                        _currentToken = Token.NotEquals;
+                    }
+                    return;
                 case '=':
                     NextChar();
                     _currentToken = Token.Equals;

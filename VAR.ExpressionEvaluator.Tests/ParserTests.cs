@@ -256,5 +256,73 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #endregion Strings
 
+        #region Relations
+
+        [TestMethod()]
+        public void Relations_1GreatherThan2_EqualsFalse()
+        {
+            string expression = "1>2";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1Equals1_EqualsTrue()
+        {
+            string expression = "1=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_10NotEquals1_EqualsTrue()
+        {
+            string expression = "10!=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_10LessThan1_EqualsFalse()
+        {
+            string expression = "10<1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1GreaterOrEqualThan1_EqualsTrue()
+        {
+            string expression = "1>=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1LessOrEqualThan1_EqualsTrue()
+        {
+            string expression = "1<=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1GreaterOrEqualThan10_EqualsFalse()
+        {
+            string expression = "1>=10";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_10LessOrEqualThan1_EqualsFalse()
+        {
+            string expression = "10<=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        #endregion Relations
+
     }
 }
