@@ -211,7 +211,7 @@ namespace VAR.ExpressionEvaluator
                     var parameters = new List<IExpressionNode>();
                     while (true)
                     {
-                        parameters.Add(ParsePlusAndMinus());
+                        parameters.Add(ParseBooleanOp());
                         if (_tokenizer.Token == Token.Comma)
                         {
                             _tokenizer.NextToken();

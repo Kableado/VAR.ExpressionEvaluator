@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VAR.ExpressionEvaluator.Tests
 {
@@ -197,6 +197,29 @@ namespace VAR.ExpressionEvaluator.Tests
             string expression = "max(1,2,10,5)";
             object result = Parser.EvaluateString(expression, evaluationContex);
             Assert.AreEqual(10m, result);
+        }
+
+        [TestMethod()]
+        public void Functions__NestedTest()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("linea1", 1);
+            evaluationContex.SetVariable("linea2", 1);
+            evaluationContex.SetVariable("linea4", 4);
+            evaluationContex.SetFunction("iif", (parameters) =>
+            {
+                if (((bool)parameters[0]) == true)
+                {
+                    return parameters[1];
+                }
+                else
+                {
+                    return parameters[2];
+                }
+            });
+            string expression = "iif(linea1>linea2,iif(linea1>linea4, linea1, iif(linea4>linea2,linea4,linea2)),iif(linea2>linea4,linea2,linea4))";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.AreEqual(4m, result);
         }
 
         #endregion Functions
