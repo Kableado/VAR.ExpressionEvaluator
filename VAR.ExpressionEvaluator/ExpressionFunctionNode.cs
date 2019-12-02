@@ -17,11 +17,12 @@ namespace VAR.ExpressionEvaluator
         public object Eval(IEvaluationContext evaluationContext)
         {
             object[] paramValues = _paramNodes.Select(p => p.Eval(evaluationContext)).ToArray();
-
             Func<object[], object> func = evaluationContext.GetFunction(_name);
-
+            if (func == null)
+            {
+                throw new Exception(string.Format("Function {0} not found", _name));
+            }
             object result = func(paramValues);
-
             return result;
         }
     }

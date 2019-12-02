@@ -1,4 +1,6 @@
-﻿namespace VAR.ExpressionEvaluator
+﻿using System;
+
+namespace VAR.ExpressionEvaluator
 {
     public class ExpressionVariableNode : IExpressionNode
     {
@@ -11,7 +13,12 @@
 
         public object Eval(IEvaluationContext evaluationContext)
         {
-            return evaluationContext.GetVariable(_name);
+            object value = evaluationContext.GetVariable(_name);
+            if (value == null)
+            {
+                throw new Exception(string.Format("Variable {0} not found", _name));
+            }
+            return value;
         }
     }
 }
