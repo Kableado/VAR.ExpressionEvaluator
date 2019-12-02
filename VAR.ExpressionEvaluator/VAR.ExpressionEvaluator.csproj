@@ -42,20 +42,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvaluationContext.cs" />
-    <Compile Include="ExpressionBooleanNode.cs" />
-    <Compile Include="ExpressionDivisionNode.cs" />
-    <Compile Include="ExpressionFunctionNode.cs" />
-    <Compile Include="ExpressionMultiplyNode.cs" />
-    <Compile Include="ExpressionUnaryNode.cs" />
-    <Compile Include="ExpressionBinaryNode.cs" />
-    <Compile Include="ExpressionMinusNode.cs" />
-    <Compile Include="ExpressionNumberNegateNode.cs" />
-    <Compile Include="ExpressionPlusNode.cs" />
-    <Compile Include="ExpressionStringNode.cs" />
-    <Compile Include="ExpressionNumberNode.cs" />
-    <Compile Include="ExpressionVariableNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionBooleanNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionDivisionNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionFunctionNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionMultiplyNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionUnaryNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionBinaryNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionMinusNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionNumberNegateNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionPlusNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionStringNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionNumberNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionVariableNode.cs" />
     <Compile Include="IEvaluationContext.cs" />
-    <Compile Include="IExpressionNode.cs" />
+    <Compile Include="ExpressionNodes\IExpressionNode.cs" />
     <Compile Include="ITokenizer.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
