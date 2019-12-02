@@ -15,7 +15,7 @@ namespace VAR.ExpressionEvaluator
 
         public IExpressionNode ParseExpression()
         {
-            var expr = ParseRelations();
+            var expr = ParseBooleanOp();
 
             if (_tokenizer.Token != Token.EOF)
             {
@@ -23,6 +23,36 @@ namespace VAR.ExpressionEvaluator
             }
 
             return expr;
+        }
+
+        private IExpressionNode ParseBooleanOp()
+        {
+            if (_tokenizer.Token == Token.Not)
+            {
+                _tokenizer.NextToken();
+                var node = ParseBooleanOp();
+                return new ExpressionBooleanNotNode(node);
+            }
+            IExpressionNode leftNode = ParseRelations();
+            while (true)
+            {
+                if (_tokenizer.Token == Token.And)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParseRelations();
+                    leftNode = new ExpressionBooleanAndNode(leftNode, rightNode);
+                }
+                if (_tokenizer.Token == Token.Or)
+                {
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParseRelations();
+                    leftNode = new ExpressionBooleanOrNode(leftNode, rightNode);
+                }
+                else
+                {
+                    return leftNode;
+                }
+            }
         }
 
         private IExpressionNode ParseRelations()
@@ -99,20 +129,20 @@ namespace VAR.ExpressionEvaluator
 
         private IExpressionNode ParseMultiplyDivision()
         {
-            IExpressionNode lhs = ParseUnary();
+            IExpressionNode lhs = ParseNumericSign();
             while (true)
             {
                 if (_tokenizer.Token == Token.Multiply)
                 {
                     _tokenizer.NextToken();
-                    IExpressionNode rhs = ParseUnary();
+                    IExpressionNode rhs = ParseNumericSign();
                     lhs = new ExpressionMultiplyNode(lhs, rhs);
 
                 }
                 else if (_tokenizer.Token == Token.Division)
                 {
                     _tokenizer.NextToken();
-                    IExpressionNode rhs = ParseUnary();
+                    IExpressionNode rhs = ParseNumericSign();
                     lhs = new ExpressionDivisionNode(lhs, rhs);
                 }
                 else
@@ -122,17 +152,17 @@ namespace VAR.ExpressionEvaluator
             }
         }
 
-        private IExpressionNode ParseUnary()
+        private IExpressionNode ParseNumericSign()
         {
             if (_tokenizer.Token == Token.Plus)
             {
                 _tokenizer.NextToken();
-                return ParseUnary();
+                return ParseNumericSign();
             }
             if (_tokenizer.Token == Token.Minus)
             {
                 _tokenizer.NextToken();
-                var node = ParseUnary();
+                var node = ParseNumericSign();
                 return new ExpressionNumberNegateNode(node);
             }
             return ParseTerminus();
@@ -203,7 +233,7 @@ namespace VAR.ExpressionEvaluator
             if (_tokenizer.Token == Token.ParenthesisStart)
             {
                 _tokenizer.NextToken();
-                IExpressionNode node = ParseRelations();
+                IExpressionNode node = ParseBooleanOp();
                 if (_tokenizer.Token != Token.ParenthesisEnd)
                 {
                     throw new Exception("Missing close parenthesis");

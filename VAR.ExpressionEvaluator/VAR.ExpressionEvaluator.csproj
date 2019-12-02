@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EvaluationContext.cs" />
+    <Compile Include="ExpressionNodes\ExpressionBooleanAndNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionBooleanNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionBooleanNotNode.cs" />
+    <Compile Include="ExpressionNodes\ExpressionBooleanOrNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionDivisionNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionEqualsNode.cs" />
     <Compile Include="ExpressionNodes\ExpressionFunctionNode.cs" />

@@ -110,6 +110,7 @@ namespace VAR.ExpressionEvaluator
                         _currentToken = Token.NotEquals;
                     }
                     return;
+
                 case '=':
                     NextChar();
                     _currentToken = Token.Equals;
@@ -123,6 +124,7 @@ namespace VAR.ExpressionEvaluator
                         }
                     }
                     return;
+
 
                 case '>':
                     NextChar();
@@ -144,6 +146,24 @@ namespace VAR.ExpressionEvaluator
                     }
                     return;
 
+                case '&':
+                    NextChar();
+                    _currentToken = Token.And;
+                    while (_currentChar == '&')
+                    {
+                        NextChar();
+                    }
+                    return;
+
+                case '|':
+                    NextChar();
+                    _currentToken = Token.Or;
+                    while (_currentChar == '|')
+                    {
+                        NextChar();
+                    }
+                    return;
+
                 case ',':
                     NextChar();
                     _currentToken = Token.Comma;
@@ -161,7 +181,23 @@ namespace VAR.ExpressionEvaluator
                     if (_currentChar == '\0') { break; }
                 }
                 _text = sb.ToString();
-                _currentToken = Token.Identifier;
+                string textLowercase = _text.ToLower();
+                if (textLowercase == "and")
+                {
+                    _currentToken = Token.And;
+                }
+                else if (textLowercase == "or")
+                {
+                    _currentToken = Token.Or;
+                }
+                else if (textLowercase == "not")
+                {
+                    _currentToken = Token.Not;
+                }
+                else
+                {
+                    _currentToken = Token.Identifier;
+                }
                 return;
             }
 

@@ -324,5 +324,48 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #endregion Relations
 
+        #region BooleanOps
+
+        [TestMethod()]
+        public void BooleanOps_And()
+        {
+            Assert.AreEqual(false, Parser.EvaluateString("false and false"));
+            Assert.AreEqual(false, Parser.EvaluateString("false and true"));
+            Assert.AreEqual(false, Parser.EvaluateString("true and false"));
+            Assert.AreEqual(true, Parser.EvaluateString("true and true"));
+
+            Assert.AreEqual(false, Parser.EvaluateString("false && false"));
+            Assert.AreEqual(false, Parser.EvaluateString("false && true"));
+            Assert.AreEqual(false, Parser.EvaluateString("true && false"));
+            Assert.AreEqual(true, Parser.EvaluateString("true && true"));
+        }
+
+        [TestMethod()]
+        public void BooleanOps_Or()
+        {
+            Assert.AreEqual(false, Parser.EvaluateString("false or false"));
+            Assert.AreEqual(true, Parser.EvaluateString("false or true"));
+            Assert.AreEqual(true, Parser.EvaluateString("true or false"));
+            Assert.AreEqual(true, Parser.EvaluateString("true or true"));
+
+            Assert.AreEqual(false, Parser.EvaluateString("false || false"));
+            Assert.AreEqual(true, Parser.EvaluateString("false || true"));
+            Assert.AreEqual(true, Parser.EvaluateString("true || false"));
+            Assert.AreEqual(true, Parser.EvaluateString("true || true"));
+        }
+
+        [TestMethod()]
+        public void BooleanOps_Not()
+        {
+            Assert.AreEqual(true, Parser.EvaluateString("!false"));
+            Assert.AreEqual(false, Parser.EvaluateString("!true"));
+
+            Assert.AreEqual(true, Parser.EvaluateString("not false"));
+            Assert.AreEqual(false, Parser.EvaluateString("not true"));
+        }
+
+
+        #endregion BooleanOps
+
     }
 }

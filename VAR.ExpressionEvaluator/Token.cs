@@ -17,6 +17,8 @@
         GreaterOrEqualThan,
         LessThan,
         LessOrEqualThan,
+        And,
+        Or,
         Comma,
         Identifier,
         String,
