@@ -1,5 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
+﻿using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace VAR.ExpressionEvaluator.Tests
 {
@@ -92,7 +92,7 @@ namespace VAR.ExpressionEvaluator.Tests
         [TestMethod()]
         public void Tokenizer__Identifiers()
         {
-            var testString = "null true false _$variable1 $variable2";
+            var testString = "null true false _$variable1 $variable2 [;{}#]";
             var t = new Tokenizer(new StringReader(testString));
 
             // "null"
@@ -118,6 +118,11 @@ namespace VAR.ExpressionEvaluator.Tests
             // "$variable2"
             Assert.AreEqual(t.Token, Token.Identifier);
             Assert.AreEqual(t.Text, "$variable2");
+            t.NextToken();
+
+            // ";{}#"
+            Assert.AreEqual(t.Token, Token.Identifier);
+            Assert.AreEqual(t.Text, ";{}#");
             t.NextToken();
 
             Assert.AreEqual(t.Token, Token.EOF);

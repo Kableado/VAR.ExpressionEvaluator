@@ -181,6 +181,41 @@ namespace VAR.ExpressionEvaluator
                     if (_currentChar == '\0') { break; }
                 }
                 _text = sb.ToString();
+                _currentToken = Token.Identifier;
+            }
+            else if (_currentChar == '[')
+            {
+                char stringEndsWith = ']';
+
+                NextChar();
+                StringBuilder sbString = new StringBuilder();
+                while (_currentChar != stringEndsWith && _currentChar != '\0')
+                {
+                    if (_currentChar != '\\')
+                    {
+                        sbString.Append(_currentChar);
+                    }
+                    else
+                    {
+                        NextChar();
+                        if (_currentChar == stringEndsWith)
+                        {
+                            sbString.Append(stringEndsWith);
+                        }
+                        else
+                        {
+                            // FIXME: Other escaped characters
+                            sbString.Append(_currentChar);
+                        }
+                    }
+                    NextChar();
+                }
+                NextChar();
+                _text = sbString.ToString();
+                _currentToken = Token.Identifier;
+            }
+            if (_currentToken == Token.Identifier)
+            {
                 string textLowercase = _text.ToLower();
                 if (textLowercase == "and")
                 {
