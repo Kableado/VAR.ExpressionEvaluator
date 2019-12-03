@@ -317,6 +317,14 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
+        public void Relations_10Different1_EqualsTrue()
+        {
+            string expression = "10<>1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
         public void Relations_10LessThan1_EqualsFalse()
         {
             string expression = "10<1";
@@ -439,7 +447,7 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.AreEqual(null, Parser.EvaluateString("100 / null"));
             Assert.AreEqual(null, Parser.EvaluateString("null / null"));
         }
-        
+
         #endregion
     }
 }

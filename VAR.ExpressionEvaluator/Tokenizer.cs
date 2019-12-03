@@ -144,6 +144,11 @@ namespace VAR.ExpressionEvaluator
                         NextChar();
                         _currentToken = Token.LessOrEqualThan;
                     }
+                    if (_currentChar == '>')
+                    {
+                        NextChar();
+                        _currentToken = Token.NotEquals;
+                    }
                     return;
 
                 case '&':
