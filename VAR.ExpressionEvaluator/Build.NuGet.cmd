@@ -5,6 +5,7 @@ if exist "%windir%\Microsoft.Net\Framework\v4.0.30319" set MsBuildPath=%windir%\
 if exist "%windir%\Microsoft.Net\Framework64\v4.0.30319" set MsBuildPath=%windir%\Microsoft.NET\Framework64\v4.0.30319
 if exist "C:\Program Files (x86)\MSBuild\14.0\Bin" set MsBuildPath=C:\Program Files (x86)\MSBuild\14.0\Bin
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin" set MsBuildPath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin
+if exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin" set MsBuildPath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
 set PATH=%MsBuildPath%;%PATH%
 
 echo %MsBuildPath%
