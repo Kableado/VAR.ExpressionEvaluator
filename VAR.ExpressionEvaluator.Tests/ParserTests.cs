@@ -301,6 +301,22 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
+        public void Relations_StringEmptyGreatherThan1_EqualsFalse()
+        {
+            string expression = "\"\">1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1GreatherThanStringEmpty_EqualsFalse()
+        {
+            string expression = "1>\"\"";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
         public void Relations_1Equals1_EqualsTrue()
         {
             string expression = "1=1";
@@ -309,9 +325,41 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
+        public void Relations_StringEmptyEquals1_EqualsFalse()
+        {
+            string expression = "\"\"=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1EqualsStringEmpty_EqualsFalse()
+        {
+            string expression = "1=\"\"";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
         public void Relations_10NotEquals1_EqualsTrue()
         {
             string expression = "10!=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_StringEmptyNotEquals1_EqualsTrue()
+        {
+            string expression = "\"\"!=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1NotEqualsStringEmpty_EqualsTrue()
+        {
+            string expression = "1!=\"\"";
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(true, result);
         }
@@ -325,9 +373,41 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         [TestMethod()]
+        public void Relations_StringEmptyDifferent1_EqualsTrue()
+        {
+            string expression = "\"\"<>1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1DifferentStringEmpty_EqualsTrue()
+        {
+            string expression = "1<>\"\"";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
         public void Relations_10LessThan1_EqualsFalse()
         {
             string expression = "10<1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_StringEmptyLessThan1_EqualsFalse()
+        {
+            string expression = "\"\"<1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1LessThanStringEmpty_EqualsFalse()
+        {
+            string expression = "1<\"\"";
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(false, result);
         }
@@ -338,6 +418,22 @@ namespace VAR.ExpressionEvaluator.Tests
             string expression = "1>=1";
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(true, result);
+        }
+
+        [TestMethod()]
+        public void Relations_StringEmptyGreaterOrEqualThan1_EqualsFalse()
+        {
+            string expression = "\"\">=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1GreaterOrEqualThanStringEmpty_EqualsFalse()
+        {
+            string expression = "1>=\"\"";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod()]
@@ -360,6 +456,22 @@ namespace VAR.ExpressionEvaluator.Tests
         public void Relations_10LessOrEqualThan1_EqualsFalse()
         {
             string expression = "10<=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_StringEmptyLessOrEqualThan1_EqualsFalse()
+        {
+            string expression = "\"\"<=1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(false, result);
+        }
+
+        [TestMethod()]
+        public void Relations_1LessOrEqualThanStringEmpty_EqualsFalse()
+        {
+            string expression = "1<=\"\"";
             object result = Parser.EvaluateString(expression);
             Assert.AreEqual(false, result);
         }

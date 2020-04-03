@@ -11,11 +11,6 @@ namespace VAR.ExpressionEvaluator
 
         private static object GreaterOrEqualThanOp(object leftValue, object rightValue)
         {
-            if (leftValue == null || rightValue == null)
-            {
-                return false;
-            }
-
             if (leftValue is string && rightValue is string)
             {
                 return string.Compare((string)leftValue, (string)rightValue) >= 0;
@@ -23,19 +18,38 @@ namespace VAR.ExpressionEvaluator
 
             if (leftValue is string)
             {
-                if (decimal.TryParse((string)leftValue, out decimal dec) == false)
+                if (string.IsNullOrEmpty((string)leftValue))
                 {
-                    throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)leftValue));
+                    leftValue = null;
                 }
-                leftValue = dec;
+                else
+                {
+                    if (decimal.TryParse((string)leftValue, out decimal dec) == false)
+                    {
+                        throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)leftValue));
+                    }
+                    leftValue = dec;
+                }
             }
             if (rightValue is string)
             {
-                if (decimal.TryParse((string)rightValue, out decimal dec) == false)
+                if (string.IsNullOrEmpty((string)rightValue))
                 {
-                    throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)rightValue));
+                    leftValue = null;
                 }
-                rightValue = dec;
+                else
+                {
+                    if (decimal.TryParse((string)rightValue, out decimal dec) == false)
+                    {
+                        throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)rightValue));
+                    }
+                    rightValue = dec;
+                }
+            }
+
+            if (leftValue == null || rightValue == null)
+            {
+                return false;
             }
 
             if ((leftValue is decimal) == false || (rightValue is decimal) == false)
