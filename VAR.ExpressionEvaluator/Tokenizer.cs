@@ -297,6 +297,12 @@ namespace VAR.ExpressionEvaluator
                     haveDecimalPoint = _currentChar == '.';
                     NextChar();
                 }
+                if (haveDecimalPoint && sbNumber.Length == 1)
+                {
+                    _text = sbNumber.ToString();
+                    _currentToken = Token.String;
+                    return;
+                }
                 _number = decimal.Parse(sbNumber.ToString(), CultureInfo.InvariantCulture);
                 _currentToken = Token.Number;
                 return;
