@@ -6,6 +6,32 @@ namespace VAR.ExpressionEvaluator
 {
     public class Parser
     {
+        #region Custom exceptions
+
+        public class UnexpectedCharactersAtEndException : Exception
+        {
+            public UnexpectedCharactersAtEndException() : base("Unexpected characters at end of expression") { }
+        }
+
+        public class MissingCloseParenthesisException : Exception
+        {
+            public MissingCloseParenthesisException() : base("Missing close parenthesis") { }
+        }
+
+        public class UnexpectedEOFException : Exception
+        {
+            public UnexpectedEOFException() : base("Unexpected EOF") { }
+        }
+
+        public class UnexpectedTokenException : Exception
+        {
+            public UnexpectedTokenException(string token) : base(string.Format("Unexpected token: {0}", token)) { }
+        }
+
+        #endregion Custom exceptions
+
+        #region Creator
+
         private ITokenizer _tokenizer;
 
         public Parser(ITokenizer tokenizer)
@@ -13,17 +39,9 @@ namespace VAR.ExpressionEvaluator
             _tokenizer = tokenizer;
         }
 
-        public IExpressionNode ParseExpression()
-        {
-            var expr = ParseBooleanOp();
+        #endregion Creator
 
-            if (_tokenizer.Token != Token.EOF)
-            {
-                throw new Exception("Unexpected characters at end of expression");
-            }
-
-            return expr;
-        }
+        #region Parsing methods
 
         private IExpressionNode ParseBooleanOp()
         {
@@ -226,7 +244,7 @@ namespace VAR.ExpressionEvaluator
                     }
                     if (_tokenizer.Token != Token.ParenthesisEnd)
                     {
-                        throw new Exception("Missing close parenthesis");
+                        throw new MissingCloseParenthesisException();
                     }
                     _tokenizer.NextToken();
 
@@ -241,13 +259,34 @@ namespace VAR.ExpressionEvaluator
                 IExpressionNode node = ParseBooleanOp();
                 if (_tokenizer.Token != Token.ParenthesisEnd)
                 {
-                    throw new Exception("Missing close parenthesis");
+                    throw new MissingCloseParenthesisException();
                 }
                 _tokenizer.NextToken();
                 return node;
             }
 
-            throw new Exception(string.Format("Unexpected token: {0}", _tokenizer.Token.ToString()));
+            if (_tokenizer.Token == Token.EOF)
+            {
+                throw new UnexpectedEOFException();
+            }
+
+            throw new UnexpectedTokenException(_tokenizer.Token.ToString());
+        }
+
+        #endregion Parsing methods
+
+        #region Public API
+
+        public IExpressionNode ParseExpression()
+        {
+            var expr = ParseBooleanOp();
+
+            if (_tokenizer.Token != Token.EOF)
+            {
+                throw new UnexpectedCharactersAtEndException();
+            }
+
+            return expr;
         }
 
         public static IExpressionNode ParseString(string str)
@@ -263,5 +302,7 @@ namespace VAR.ExpressionEvaluator
             IExpressionNode node = ParseString(str);
             return node.Eval(evaluationContext);
         }
+
+        #endregion Public API
     }
 }

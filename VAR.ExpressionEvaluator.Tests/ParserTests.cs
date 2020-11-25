@@ -204,7 +204,7 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #endregion Variables
 
-        #region Funcitions
+        #region Functions
 
         [TestMethod()]
         public void Functions__MaxFunction()
@@ -581,5 +581,191 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         #endregion
+
+        #region Excepctions
+
+        [TestMethod()]
+        public void Exceptions__HelloAtEnd__UnexpectedCharactersAtEndException()
+        {
+            try
+            {
+                string expression = "1 + 1 \"Hello\"";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedCharactersAtEndException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__TrueAtEndInsideParens__MissingCloseParenthesisException()
+        {
+            try
+            {
+                string expression = "(1+1 true)";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.MissingCloseParenthesisException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__TrueAtEndInsideFunctionCall__MissingCloseParenthesisException()
+        {
+            try
+            {
+                string expression = "Func(1 true)";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.MissingCloseParenthesisException));
+            }
+        }
+
+
+        [TestMethod()]
+        public void Exceptions__EOF__UnexpectedEOFException()
+        {
+            try
+            {
+                string expression = "";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__Plus__UnexpectedEOFException()
+        {
+            try
+            {
+                string expression = "+";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__Minus__UnexpectedEOFException()
+        {
+            try
+            {
+                string expression = "-";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__OpenParens__UnexpectedEOFException()
+        {
+            try
+            {
+                string expression = "(";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__Comma__UnexpectedTokenException()
+        {
+            try
+            {
+                string expression = ",";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__Division__UnexpectedTokenException()
+        {
+            try
+            {
+                string expression = "/";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__Multiply__UnexpectedTokenException()
+        {
+            try
+            {
+                string expression = "*";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__CloseParens__UnexpectedTokenException()
+        {
+            try
+            {
+                string expression = ")";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+            }
+        }
+
+        [TestMethod()]
+        public void Exceptions__Parens__UnexpectedTokenException()
+        {
+            try
+            {
+                string expression = "()";
+                object result = Parser.EvaluateString(expression);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+            }
+        }
+
+
+        #endregion Misc
     }
 }
