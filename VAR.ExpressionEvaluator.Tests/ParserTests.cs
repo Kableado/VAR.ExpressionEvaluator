@@ -87,6 +87,26 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #endregion Number signs
 
+        #region Decimal numbers
+
+        [TestMethod()]
+        public void Decimals__OnePointZero()
+        {
+            string expression = "1.0";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(1.0m, result);
+        }
+
+        [TestMethod()]
+        public void Decimals__OnePointOne()
+        {
+            string expression = "1.1";
+            object result = Parser.EvaluateString(expression);
+            Assert.AreEqual(1.1m, result);
+        }
+
+        #endregion Decimal numbers
+
         #region Multiplication and division
 
         [TestMethod()]
