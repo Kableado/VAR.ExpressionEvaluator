@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace VAR.ExpressionEvaluator.Tests
 {
-    [TestClass()]
     public class ExpressionBinaryNodeTests
     {
-        [TestMethod()]
+        [Fact]
         public void ExpressionBinaryNode__Plus()
         {
             var expr = new ExpressionBinaryNode(
@@ -16,10 +15,10 @@ namespace VAR.ExpressionEvaluator.Tests
 
             var result = expr.Eval(null);
 
-            Assert.AreEqual(30m, result);
+            Assert.Equal(30m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ExpressionBinaryNode__Minus()
         {
             var expr = new ExpressionBinaryNode(
@@ -30,10 +29,10 @@ namespace VAR.ExpressionEvaluator.Tests
 
             var result = expr.Eval(null);
 
-            Assert.AreEqual(-10m, result);
+            Assert.Equal(-10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ExpressionBinaryNode__Multiply()
         {
             var expr = new ExpressionBinaryNode(
@@ -44,10 +43,10 @@ namespace VAR.ExpressionEvaluator.Tests
 
             var result = expr.Eval(null);
 
-            Assert.AreEqual(200m, result);
+            Assert.Equal(200m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void ExpressionBinaryNode__Division()
         {
             var expr = new ExpressionBinaryNode(
@@ -58,7 +57,7 @@ namespace VAR.ExpressionEvaluator.Tests
 
             var result = expr.Eval(null);
 
-            Assert.AreEqual(2m, result);
+            Assert.Equal(2m, result);
         }
     }
 }

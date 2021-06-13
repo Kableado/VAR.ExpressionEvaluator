@@ -1,175 +1,174 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace VAR.ExpressionEvaluator.Tests
 {
-    [TestClass()]
     public class ParserTests
     {
         #region Plus and Minus
 
-        [TestMethod()]
+        [Fact]
         public void PlusAndMinus__Ten_EqualsTen()
         {
             string expression = "10";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(10m, result);
+            Assert.Equal(10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PlusAndMinus__OnePlusTwo_EqualsThree()
         {
             string expression = "1   + 2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(3m, result);
+            Assert.Equal(3m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PlusAndMinus__OneMinusTwo_EqualsMinusOne()
         {
             string expression = "1   - 2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(-1m, result);
+            Assert.Equal(-1m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void PlusAndMinus__OneMillionMinusHundredThousands_EqualsNineHundredThousands()
         {
             string expression = "1000000   - 100000";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(900000m, result);
+            Assert.Equal(900000m, result);
         }
 
         #endregion Plus and minus
 
         #region Number signs
 
-        [TestMethod()]
+        [Fact]
         public void Signs__MinusTen()
         {
             string expression = "-10";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(-10m, result);
+            Assert.Equal(-10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Signs__PlusTen()
         {
             string expression = "+10";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(10m, result);
+            Assert.Equal(10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Signs__MinusMinusTen()
         {
             string expression = "--10";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(10m, result);
+            Assert.Equal(10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Signs__MinusPlusChainTen()
         {
             string expression = "--++-+-10";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(10m, result);
+            Assert.Equal(10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Signs__10Minus20Minus30()
         {
             string expression = "10 + -20 - +30";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(-40m, result);
+            Assert.Equal(-40m, result);
         }
 
         #endregion Number signs
 
         #region Decimal numbers
 
-        [TestMethod()]
+        [Fact]
         public void Decimals__OnePointZero()
         {
             string expression = "1.0";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(1.0m, result);
+            Assert.Equal(1.0m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Decimals__OnePointOne()
         {
             string expression = "1.1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(1.1m, result);
+            Assert.Equal(1.1m, result);
         }
 
         #endregion Decimal numbers
 
         #region Multiplication and division
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__10MutiplyBy2()
         {
             string expression = "10 * 2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(20m, result);
+            Assert.Equal(20m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__10DividedBy2()
         {
             string expression = "10 / 2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(5m, result);
+            Assert.Equal(5m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__5DividedBy2()
         {
             string expression = "5 / 2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(2.5m, result);
+            Assert.Equal(2.5m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__5DividedBy2Plus1()
         {
             string expression = "5 / 2 + 1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(3.5m, result);
+            Assert.Equal(3.5m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__1Plus5DividedBy2()
         {
             string expression = "1 + 5 / 2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(3.5m, result);
+            Assert.Equal(3.5m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__5DividedByParen1Plus1()
         {
             string expression = "5 / (1 + 1)";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(2.5m, result);
+            Assert.Equal(2.5m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void MultAndDiv__Paren2Plus2DividedByParen1Plus1()
         {
             string expression = "(2 + 2) / (1 + 1)";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(2m, result);
+            Assert.Equal(2m, result);
         }
 
         #endregion Multiplication and division
 
         #region Variables
 
-        [TestMethod()]
+        [Fact]
         public void Variables__Var1PlusVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
@@ -177,10 +176,10 @@ namespace VAR.ExpressionEvaluator.Tests
             evaluationContex.SetVariable("v2", 1);
             string expression = "v1 + v2";
             object result = Parser.EvaluateString(expression, evaluationContex);
-            Assert.AreEqual(2m, result);
+            Assert.Equal(2m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Variables__Var1MultiplyVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
@@ -188,10 +187,10 @@ namespace VAR.ExpressionEvaluator.Tests
             evaluationContex.SetVariable("v2", 5);
             string expression = "v1 * v2";
             object result = Parser.EvaluateString(expression, evaluationContex);
-            Assert.AreEqual(50m, result);
+            Assert.Equal(50m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Variables__Var1DivideVar2()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
@@ -199,14 +198,14 @@ namespace VAR.ExpressionEvaluator.Tests
             evaluationContex.SetVariable("$v2", 20);
             string expression = "_v1 / $v2";
             object result = Parser.EvaluateString(expression, evaluationContex);
-            Assert.AreEqual(5m, result);
+            Assert.Equal(5m, result);
         }
 
         #endregion Variables
 
         #region Functions
 
-        [TestMethod()]
+        [Fact]
         public void Functions__MaxFunction()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
@@ -216,10 +215,10 @@ namespace VAR.ExpressionEvaluator.Tests
             });
             string expression = "max(1,2,10,5)";
             object result = Parser.EvaluateString(expression, evaluationContex);
-            Assert.AreEqual(10m, result);
+            Assert.Equal(10m, result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Functions__NestedTest()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
@@ -239,22 +238,22 @@ namespace VAR.ExpressionEvaluator.Tests
             });
             string expression = "iif(linea1>linea2,iif(linea1>linea4, linea1, iif(linea4>linea2,linea4,linea2)),iif(linea2>linea4,linea2,linea4))";
             object result = Parser.EvaluateString(expression, evaluationContex);
-            Assert.AreEqual(4m, result);
+            Assert.Equal(4m, result);
         }
 
         #endregion Functions
 
         #region Strings
 
-        [TestMethod()]
+        [Fact]
         public void Strings__Contatenate_Hello_World()
         {
             string expression = "\"Hello\" + ' ' +\"World\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual("Hello World", result);
+            Assert.Equal("Hello World", result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Strings__Contatenate_Hello_World_WithVariables()
         {
             EvaluationContext evaluationContex = new EvaluationContext();
@@ -263,45 +262,45 @@ namespace VAR.ExpressionEvaluator.Tests
             evaluationContex.SetVariable("v3", "World");
             string expression = "v1 + v2 + v3";
             object result = Parser.EvaluateString(expression, evaluationContex);
-            Assert.AreEqual("Hello World", result);
+            Assert.Equal("Hello World", result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Strings__Fail_Minus()
         {
             string expression = "'Hello' - 'World'";
             try
             {
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception)
             {
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Strings__Fail_Multiply()
         {
             string expression = "'Hello' * 'World'";
             try
             {
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception)
             {
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Strings__Fail_Division()
         {
             string expression = "'Hello' / 'World'";
             try
             {
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception)
             {
@@ -312,230 +311,230 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #region Relations
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1GreatherThan2_EqualsFalse()
         {
             string expression = "1>2";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyGreatherThan1_EqualsFalse()
         {
             string expression = "\"\">1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1GreatherThanStringEmpty_EqualsFalse()
         {
             string expression = "1>\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1Equals1_EqualsTrue()
         {
             string expression = "1=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyEquals1_EqualsFalse()
         {
             string expression = "\"\"=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1EqualsStringEmpty_EqualsFalse()
         {
             string expression = "1=\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_10NotEquals1_EqualsTrue()
         {
             string expression = "10!=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyNotEquals1_EqualsTrue()
         {
             string expression = "\"\"!=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1NotEqualsStringEmpty_EqualsTrue()
         {
             string expression = "1!=\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_10Different1_EqualsTrue()
         {
             string expression = "10<>1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyDifferent1_EqualsTrue()
         {
             string expression = "\"\"<>1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1DifferentStringEmpty_EqualsTrue()
         {
             string expression = "1<>\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_10LessThan1_EqualsFalse()
         {
             string expression = "10<1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyLessThan1_EqualsFalse()
         {
             string expression = "\"\"<1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1LessThanStringEmpty_EqualsFalse()
         {
             string expression = "1<\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1GreaterOrEqualThan1_EqualsTrue()
         {
             string expression = "1>=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyGreaterOrEqualThan1_EqualsFalse()
         {
             string expression = "\"\">=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1GreaterOrEqualThanStringEmpty_EqualsFalse()
         {
             string expression = "1>=\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1LessOrEqualThan1_EqualsTrue()
         {
             string expression = "1<=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(true, result);
+            Assert.True((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1GreaterOrEqualThan10_EqualsFalse()
         {
             string expression = "1>=10";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_10LessOrEqualThan1_EqualsFalse()
         {
             string expression = "10<=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_StringEmptyLessOrEqualThan1_EqualsFalse()
         {
             string expression = "\"\"<=1";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
-        [TestMethod()]
+        [Fact]
         public void Relations_1LessOrEqualThanStringEmpty_EqualsFalse()
         {
             string expression = "1<=\"\"";
             object result = Parser.EvaluateString(expression);
-            Assert.AreEqual(false, result);
+            Assert.False((bool?)result);
         }
 
         #endregion Relations
 
         #region BooleanOps
 
-        [TestMethod()]
+        [Fact]
         public void BooleanOps_And()
         {
-            Assert.AreEqual(false, Parser.EvaluateString("false and false"));
-            Assert.AreEqual(false, Parser.EvaluateString("false and true"));
-            Assert.AreEqual(false, Parser.EvaluateString("true and false"));
-            Assert.AreEqual(true, Parser.EvaluateString("true and true"));
+            Assert.False((bool?)Parser.EvaluateString("false and false"));
+            Assert.False((bool?)Parser.EvaluateString("false and true"));
+            Assert.False((bool?)Parser.EvaluateString("true and false"));
+            Assert.True((bool?)Parser.EvaluateString("true and true"));
 
-            Assert.AreEqual(false, Parser.EvaluateString("false && false"));
-            Assert.AreEqual(false, Parser.EvaluateString("false && true"));
-            Assert.AreEqual(false, Parser.EvaluateString("true && false"));
-            Assert.AreEqual(true, Parser.EvaluateString("true && true"));
+            Assert.False((bool?)Parser.EvaluateString("false && false"));
+            Assert.False((bool?)Parser.EvaluateString("false && true"));
+            Assert.False((bool?)Parser.EvaluateString("true && false"));
+            Assert.True((bool?)Parser.EvaluateString("true && true"));
         }
 
-        [TestMethod()]
+        [Fact]
         public void BooleanOps_Or()
         {
-            Assert.AreEqual(false, Parser.EvaluateString("false or false"));
-            Assert.AreEqual(true, Parser.EvaluateString("false or true"));
-            Assert.AreEqual(true, Parser.EvaluateString("true or false"));
-            Assert.AreEqual(true, Parser.EvaluateString("true or true"));
+            Assert.False((bool?)Parser.EvaluateString("false or false"));
+            Assert.True((bool?)Parser.EvaluateString("false or true"));
+            Assert.True((bool?)Parser.EvaluateString("true or false"));
+            Assert.True((bool?)Parser.EvaluateString("true or true"));
 
-            Assert.AreEqual(false, Parser.EvaluateString("false || false"));
-            Assert.AreEqual(true, Parser.EvaluateString("false || true"));
-            Assert.AreEqual(true, Parser.EvaluateString("true || false"));
-            Assert.AreEqual(true, Parser.EvaluateString("true || true"));
+            Assert.False((bool?)Parser.EvaluateString("false || false"));
+            Assert.True((bool?)Parser.EvaluateString("false || true"));
+            Assert.True((bool?)Parser.EvaluateString("true || false"));
+            Assert.True((bool?)Parser.EvaluateString("true || true"));
         }
 
-        [TestMethod()]
+        [Fact]
         public void BooleanOps_Not()
         {
-            Assert.AreEqual(true, Parser.EvaluateString("!false"));
-            Assert.AreEqual(false, Parser.EvaluateString("!true"));
+            Assert.True((bool?)Parser.EvaluateString("!false"));
+            Assert.False((bool?)Parser.EvaluateString("!true"));
 
-            Assert.AreEqual(true, Parser.EvaluateString("not false"));
-            Assert.AreEqual(false, Parser.EvaluateString("not true"));
+            Assert.True((bool?)Parser.EvaluateString("not false"));
+            Assert.False((bool?)Parser.EvaluateString("not true"));
         }
 
 
@@ -544,224 +543,224 @@ namespace VAR.ExpressionEvaluator.Tests
         #region Null value
 
 
-        [TestMethod()]
+        [Fact]
         public void NullValue_NullPlusAnything_EqualsNull()
         {
-            Assert.AreEqual(null, Parser.EvaluateString("null + 1"));
-            Assert.AreEqual(null, Parser.EvaluateString("null + 100"));
-            Assert.AreEqual(null, Parser.EvaluateString("1 + null"));
-            Assert.AreEqual(null, Parser.EvaluateString("100 + null"));
-            Assert.AreEqual(null, Parser.EvaluateString("null + null"));
+            Assert.Null((bool?)Parser.EvaluateString("null + 1"));
+            Assert.Null((bool?)Parser.EvaluateString("null + 100"));
+            Assert.Null((bool?)Parser.EvaluateString("1 + null"));
+            Assert.Null((bool?)Parser.EvaluateString("100 + null"));
+            Assert.Null((bool?)Parser.EvaluateString("null + null"));
         }
 
-        [TestMethod()]
+        [Fact]
         public void NullValue_NullMinusAnything_EqualsNull()
         {
-            Assert.AreEqual(null, Parser.EvaluateString("null - 1"));
-            Assert.AreEqual(null, Parser.EvaluateString("null - 100"));
-            Assert.AreEqual(null, Parser.EvaluateString("1 - null"));
-            Assert.AreEqual(null, Parser.EvaluateString("100 - null"));
-            Assert.AreEqual(null, Parser.EvaluateString("null - null"));
+            Assert.Null((bool?)Parser.EvaluateString("null - 1"));
+            Assert.Null((bool?)Parser.EvaluateString("null - 100"));
+            Assert.Null((bool?)Parser.EvaluateString("1 - null"));
+            Assert.Null((bool?)Parser.EvaluateString("100 - null"));
+            Assert.Null((bool?)Parser.EvaluateString("null - null"));
         }
 
-        [TestMethod()]
+        [Fact]
         public void NullValue_NullByAnything_EqualsNull()
         {
-            Assert.AreEqual(null, Parser.EvaluateString("null * 1"));
-            Assert.AreEqual(null, Parser.EvaluateString("null * 100"));
-            Assert.AreEqual(null, Parser.EvaluateString("1 * null"));
-            Assert.AreEqual(null, Parser.EvaluateString("100 * null"));
-            Assert.AreEqual(null, Parser.EvaluateString("null * null"));
+            Assert.Null((bool?)Parser.EvaluateString("null * 1"));
+            Assert.Null((bool?)Parser.EvaluateString("null * 100"));
+            Assert.Null((bool?)Parser.EvaluateString("1 * null"));
+            Assert.Null((bool?)Parser.EvaluateString("100 * null"));
+            Assert.Null((bool?)Parser.EvaluateString("null * null"));
 
-            Assert.AreEqual(null, Parser.EvaluateString("null / 1"));
-            Assert.AreEqual(null, Parser.EvaluateString("null / 100"));
-            Assert.AreEqual(null, Parser.EvaluateString("1 / null"));
-            Assert.AreEqual(null, Parser.EvaluateString("100 / null"));
-            Assert.AreEqual(null, Parser.EvaluateString("null / null"));
+            Assert.Null((bool?)Parser.EvaluateString("null / 1"));
+            Assert.Null((bool?)Parser.EvaluateString("null / 100"));
+            Assert.Null((bool?)Parser.EvaluateString("1 / null"));
+            Assert.Null((bool?)Parser.EvaluateString("100 / null"));
+            Assert.Null((bool?)Parser.EvaluateString("null / null"));
         }
 
         #endregion
 
         #region Excepctions
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__HelloAtEnd__UnexpectedCharactersAtEndException()
         {
             try
             {
                 string expression = "1 + 1 \"Hello\"";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedCharactersAtEndException));
+                Assert.IsType<Parser.UnexpectedCharactersAtEndException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__TrueAtEndInsideParens__MissingCloseParenthesisException()
         {
             try
             {
                 string expression = "(1+1 true)";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.MissingCloseParenthesisException));
+                Assert.IsType<Parser.MissingCloseParenthesisException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__TrueAtEndInsideFunctionCall__MissingCloseParenthesisException()
         {
             try
             {
                 string expression = "Func(1 true)";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.MissingCloseParenthesisException));
+                Assert.IsType<Parser.MissingCloseParenthesisException>(ex);
             }
         }
 
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__EOF__UnexpectedEOFException()
         {
             try
             {
                 string expression = "";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+                Assert.IsType<Parser.UnexpectedEOFException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__Plus__UnexpectedEOFException()
         {
             try
             {
                 string expression = "+";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+                Assert.IsType<Parser.UnexpectedEOFException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__Minus__UnexpectedEOFException()
         {
             try
             {
                 string expression = "-";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+                Assert.IsType<Parser.UnexpectedEOFException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__OpenParens__UnexpectedEOFException()
         {
             try
             {
                 string expression = "(";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedEOFException));
+                Assert.IsType<Parser.UnexpectedEOFException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__Comma__UnexpectedTokenException()
         {
             try
             {
                 string expression = ",";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+                Assert.IsType<Parser.UnexpectedTokenException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__Division__UnexpectedTokenException()
         {
             try
             {
                 string expression = "/";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+                Assert.IsType<Parser.UnexpectedTokenException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__Multiply__UnexpectedTokenException()
         {
             try
             {
                 string expression = "*";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+                Assert.IsType<Parser.UnexpectedTokenException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__CloseParens__UnexpectedTokenException()
         {
             try
             {
                 string expression = ")";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+                Assert.IsType<Parser.UnexpectedTokenException>(ex);
             }
         }
 
-        [TestMethod()]
+        [Fact]
         public void Exceptions__Parens__UnexpectedTokenException()
         {
             try
             {
                 string expression = "()";
                 object result = Parser.EvaluateString(expression);
-                Assert.Fail();
+                Assert.True(false);
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(Parser.UnexpectedTokenException));
+                Assert.IsType<Parser.UnexpectedTokenException>(ex);
             }
         }
 

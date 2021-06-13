@@ -1,29 +1,28 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace VAR.ExpressionEvaluator.Tests
 {
-    [TestClass()]
     public class ExpressionStringNodeTests
     {
-        [TestMethod()]
+        [Fact]
         public void ExpressionNumberNode__Hello()
         {
             IExpressionNode node = new ExpressionStringNode("Hello");
-            Assert.AreEqual("Hello", node.Eval(null));
+            Assert.Equal("Hello", node.Eval(null));
         }
 
-        [TestMethod()]
+        [Fact]
         public void ExpressionNumberNode__World()
         {
             IExpressionNode node = new ExpressionStringNode("World");
-            Assert.AreEqual("World", node.Eval(null));
+            Assert.Equal("World", node.Eval(null));
         }
 
-        [TestMethod()]
+        [Fact]
         public void ExpressionNumberNode__Hello_World()
         {
             IExpressionNode node = new ExpressionStringNode("Hello World");
-            Assert.AreEqual("Hello World", node.Eval(null));
+            Assert.Equal("Hello World", node.Eval(null));
         }
     }
 }
