@@ -8,23 +8,20 @@
   <PropertyGroup>
     <PackageId>VAR.ExpressionEvaluator</PackageId>
     <Title>VAR.ExpressionEvaluator</Title>
-    <Version>0.2.3</Version>
+    <Version>0.2.4</Version>
     <Description>Expression Evaluation Library</Description>
     <Authors>VAR</Authors>
     <Company>VAR</Company>
-    <Copyright>Copyright © VAR 2019-2020</Copyright>
+    <Copyright>Copyright © VAR 2019-2021</Copyright>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Kableado/VAR.ExpressionEvaluator</PackageProjectUrl>
     <PackageTags>Expression;Evaluation;Expression Evaluation</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath=""/>
+    <Content Include="..\LICENSE.txt" Link="LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
   <Target Name="CopyPackage" AfterTargets="Pack">
-    <Copy
-      SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg"
-      DestinationFolder="Nuget\"
-      />
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="Nuget\" />
   </Target>
 </Project>
