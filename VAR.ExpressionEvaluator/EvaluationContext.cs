@@ -48,7 +48,7 @@ namespace VAR.ExpressionEvaluator
             {
                 value = ((DateTime)value).ToString("s");
             }
-            if ((value is string) == false && (value is bool) == false)
+            if ((value is string) == false && (value is bool) == false && value != null)
             {
                 value = Convert.ToDecimal(value);
             }

@@ -16,6 +16,11 @@ namespace VAR.ExpressionEvaluator
                 return string.Compare((string)leftValue, (string)rightValue) == 0;
             }
 
+            if ((leftValue is string && rightValue == null) || (leftValue == null && rightValue is string))
+            {
+                return false;
+            }
+
             if (leftValue is string)
             {
                 if (string.IsNullOrEmpty((string)leftValue))

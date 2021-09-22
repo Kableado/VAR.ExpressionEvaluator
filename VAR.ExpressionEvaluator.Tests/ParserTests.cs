@@ -495,6 +495,46 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.False((bool?)result);
         }
 
+        [Fact()]
+        public void Relations__Var1NullEquals666_EqualsFalse()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", null);
+            string expression = "v1 = 666";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.False((bool?)result);
+        }
+
+        [Fact()]
+        public void Relations__Var1NullEqualsStringHello_EqualsFalse()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", null);
+            string expression = "v1 = \"Hello\"";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.False((bool?)result);
+        }
+
+        [Fact()]
+        public void Relations__Var1666Equals666_EqualsFalse()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", 666);
+            string expression = "v1 = 666";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.True((bool?)result);
+        }
+
+        [Fact()]
+        public void Relations__Var1HelloEqualsStringHello_EqualsFalse()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", "Hello");
+            string expression = "v1 = \"Hello\"";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.True((bool?)result);
+        }
+
         #endregion Relations
 
         #region BooleanOps
