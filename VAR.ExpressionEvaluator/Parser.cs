@@ -84,6 +84,13 @@ namespace VAR.ExpressionEvaluator
                     IExpressionNode rightNode = ParsePlusAndMinus();
                     leftNode = new ExpressionEqualsNode(leftNode, rightNode);
                 }
+                if (_tokenizer.Token == Token.ExclusiveEquals)
+                {
+                    // TODO: Implement ExpressionExclusiveEqualsNode
+                    _tokenizer.NextToken();
+                    IExpressionNode rightNode = ParsePlusAndMinus();
+                    leftNode = new ExpressionEqualsNode(leftNode, rightNode);
+                }
                 else if (_tokenizer.Token == Token.NotEquals)
                 {
                     _tokenizer.NextToken();

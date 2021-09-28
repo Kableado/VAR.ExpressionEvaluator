@@ -547,6 +547,11 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.False((bool?)Parser.EvaluateString("true and false"));
             Assert.True((bool?)Parser.EvaluateString("true and true"));
 
+            Assert.False((bool?)Parser.EvaluateString("False And False"));
+            Assert.False((bool?)Parser.EvaluateString("False And True"));
+            Assert.False((bool?)Parser.EvaluateString("True And False"));
+            Assert.True((bool?)Parser.EvaluateString("True And True"));
+
             Assert.False((bool?)Parser.EvaluateString("false && false"));
             Assert.False((bool?)Parser.EvaluateString("false && true"));
             Assert.False((bool?)Parser.EvaluateString("true && false"));
@@ -560,6 +565,11 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.True((bool?)Parser.EvaluateString("false or true"));
             Assert.True((bool?)Parser.EvaluateString("true or false"));
             Assert.True((bool?)Parser.EvaluateString("true or true"));
+
+            Assert.False((bool?)Parser.EvaluateString("False Or False"));
+            Assert.True((bool?)Parser.EvaluateString("False Or True"));
+            Assert.True((bool?)Parser.EvaluateString("True Or False"));
+            Assert.True((bool?)Parser.EvaluateString("True Or True"));
 
             Assert.False((bool?)Parser.EvaluateString("false || false"));
             Assert.True((bool?)Parser.EvaluateString("false || true"));
@@ -576,7 +586,6 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.True((bool?)Parser.EvaluateString("not false"));
             Assert.False((bool?)Parser.EvaluateString("not true"));
         }
-
 
         #endregion BooleanOps
 
@@ -620,6 +629,40 @@ namespace VAR.ExpressionEvaluator.Tests
         }
 
         #endregion
+
+        #region String coercions
+
+        [Fact()]
+        public void StringCoercions__Var1NullEqualsStringEmpty_EqualsTrue()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", null);
+            string expression = "v1 = \"\"";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.True((bool?)result);
+        }
+
+        [Fact()]
+        public void StringCoercions__Var1TrueStringEqualsTrue_EqualsTrue()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", "True");
+            string expression = "v1 = true";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.True((bool?)result);
+        }
+
+        [Fact()]
+        public void StringCoercions__Var1FalseStringEqualsFalse_EqualsTrue()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("v1", "False");
+            string expression = "v1 = false";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.True((bool?)result);
+        }
+
+        #endregion String coercions
 
         #region Excepctions
 
