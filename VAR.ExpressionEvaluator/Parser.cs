@@ -60,7 +60,7 @@ namespace VAR.ExpressionEvaluator
                     IExpressionNode rightNode = ParseRelations();
                     leftNode = new ExpressionBooleanAndNode(leftNode, rightNode);
                 }
-                if (_tokenizer.Token == Token.Or)
+                else if (_tokenizer.Token == Token.Or)
                 {
                     _tokenizer.NextToken();
                     IExpressionNode rightNode = ParseRelations();
@@ -84,7 +84,7 @@ namespace VAR.ExpressionEvaluator
                     IExpressionNode rightNode = ParsePlusAndMinus();
                     leftNode = new ExpressionEqualsNode(leftNode, rightNode);
                 }
-                if (_tokenizer.Token == Token.ExclusiveEquals)
+                else if (_tokenizer.Token == Token.ExclusiveEquals)
                 {
                     // TODO: Implement ExpressionExclusiveEqualsNode
                     _tokenizer.NextToken();

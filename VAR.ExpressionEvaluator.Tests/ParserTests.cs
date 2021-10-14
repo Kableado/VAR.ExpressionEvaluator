@@ -664,7 +664,7 @@ namespace VAR.ExpressionEvaluator.Tests
 
         #endregion String coercions
 
-        #region Excepctions
+        #region Exceptions
 
         [Fact]
         public void Exceptions__HelloAtEnd__UnexpectedCharactersAtEndException()
@@ -847,6 +847,22 @@ namespace VAR.ExpressionEvaluator.Tests
             }
         }
 
+
+        #endregion Exceptions
+
+        #region Misc
+
+        [Fact()]
+        public void Misc__MixedExpression_EqualsFalse()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("QI_86", null);
+            evaluationContex.SetVariable("QI_87", null);
+            evaluationContex.SetVariable("QI_104", null);
+            string expression = "( QI_86 = 0 Or QI_86 = null ) And ( QI_87 = 0 Or QI_87 = null ) And QI_104 > 0";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.False((bool?)result);
+        }
 
         #endregion Misc
     }
