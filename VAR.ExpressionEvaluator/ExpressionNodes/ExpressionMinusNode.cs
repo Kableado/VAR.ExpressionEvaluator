@@ -18,7 +18,7 @@ namespace VAR.ExpressionEvaluator
 
             if (leftValue is string)
             {
-                if (decimal.TryParse((string)leftValue, out decimal dec) == false)
+                if (decimal.TryParse((string)leftValue, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal dec) == false)
                 {
                     throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)leftValue));
                 }
@@ -26,7 +26,7 @@ namespace VAR.ExpressionEvaluator
             }
             if (rightValue is string)
             {
-                if (decimal.TryParse((string)rightValue, out decimal dec) == false)
+                if (decimal.TryParse((string)rightValue, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal dec) == false)
                 {
                     throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)rightValue));
                 }

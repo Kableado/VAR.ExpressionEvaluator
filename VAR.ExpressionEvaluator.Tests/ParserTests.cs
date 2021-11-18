@@ -864,6 +864,17 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.False((bool?)result);
         }
 
+        [Fact()]
+        public void Misc__ProductWithStringDecimals_EqualsFalse()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetVariable("$1109", "1933");
+            evaluationContex.SetVariable("$1150", "02.00000");
+            string expression = "$1109 * $1150";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.Equal(3866.00000M, result);
+        }
+
         #endregion Misc
     }
 }

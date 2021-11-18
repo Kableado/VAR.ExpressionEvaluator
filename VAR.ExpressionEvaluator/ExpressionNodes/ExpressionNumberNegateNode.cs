@@ -18,7 +18,7 @@ namespace VAR.ExpressionEvaluator
 
             if (value is string)
             {
-                if (decimal.TryParse((string)value, out decimal dec) == false)
+                if (decimal.TryParse((string)value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal dec) == false)
                 {
                     throw new Exception(string.Format("Can't convert to decimal string value \"{0}\"", (string)value));
                 }

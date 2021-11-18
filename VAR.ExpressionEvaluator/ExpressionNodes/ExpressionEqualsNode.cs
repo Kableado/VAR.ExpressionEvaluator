@@ -44,7 +44,7 @@
             // Decimal
             if (leftValue is string)
             {
-                if (decimal.TryParse((string)leftValue, out decimal dec) == false)
+                if (decimal.TryParse((string)leftValue, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal dec) == false)
                 {
                     leftValue = null;
                 }
@@ -55,7 +55,7 @@
             }
             if (rightValue is string)
             {
-                if (decimal.TryParse((string)rightValue, out decimal dec) == false)
+                if (decimal.TryParse((string)rightValue, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal dec) == false)
                 {
                     rightValue = null;
                 }
@@ -85,7 +85,7 @@
                     return null;
                 }
                 decimal decValue;
-                if (decimal.TryParse(text, out decValue))
+                if (decimal.TryParse(text, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decValue))
                 {
                     return decValue != 0;
                 }
