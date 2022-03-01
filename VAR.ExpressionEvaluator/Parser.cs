@@ -239,15 +239,18 @@ namespace VAR.ExpressionEvaluator
                 {
                     _tokenizer.NextToken();
                     var parameters = new List<IExpressionNode>();
-                    while (true)
+                    if (_tokenizer.Token != Token.ParenthesisEnd)
                     {
-                        parameters.Add(ParseBooleanOp());
-                        if (_tokenizer.Token == Token.Comma)
+                        while (true)
                         {
-                            _tokenizer.NextToken();
-                            continue;
+                            parameters.Add(ParseBooleanOp());
+                            if (_tokenizer.Token == Token.Comma)
+                            {
+                                _tokenizer.NextToken();
+                                continue;
+                            }
+                            break;
                         }
-                        break;
                     }
                     if (_tokenizer.Token != Token.ParenthesisEnd)
                     {

@@ -241,6 +241,19 @@ namespace VAR.ExpressionEvaluator.Tests
             Assert.Equal(4m, result);
         }
 
+        [Fact]
+        public void Functions__ZeroParameters()
+        {
+            EvaluationContext evaluationContex = new EvaluationContext();
+            evaluationContex.SetFunction("constant", (parameters) =>
+            {
+                return 9m;
+            });
+            string expression = "constant()";
+            object result = Parser.EvaluateString(expression, evaluationContex);
+            Assert.Equal(9m, result);
+        }
+
         #endregion Functions
 
         #region Strings
@@ -249,6 +262,14 @@ namespace VAR.ExpressionEvaluator.Tests
         public void Strings__Contatenate_Hello_World()
         {
             string expression = "\"Hello\" + ' ' +\"World\"";
+            object result = Parser.EvaluateString(expression);
+            Assert.Equal("Hello World", result);
+        }
+        
+        [Fact]
+        public void Strings__Contatenate_Hello_World_SimpleQuotes()
+        {
+            string expression = "'Hello' + ' ' +'World'";
             object result = Parser.EvaluateString(expression);
             Assert.Equal("Hello World", result);
         }
